@@ -10,6 +10,15 @@ class DrawerItem extends React.Component {
     const { title, focused } = this.props;
 
     switch (title) {
+      case "Login":
+        return (
+          <Icon
+            name="calendar-date"
+            family="ArgonExtra"
+            size={14}
+            color={focused ? "white" : argonTheme.COLORS.INFO}
+          />
+        );
       case "Home":
         return (
           <Icon
@@ -44,15 +53,6 @@ class DrawerItem extends React.Component {
             family="ArgonExtra"
             size={14}
             color={focused ? "white" : argonTheme.COLORS.WARNING}
-          />
-        );
-      case "Account":
-        return (
-          <Icon
-            name="calendar-date"
-            family="ArgonExtra"
-            size={14}
-            color={focused ? "white" : argonTheme.COLORS.INFO}
           />
         );
       case "Getting Started":
