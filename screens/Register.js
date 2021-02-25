@@ -4,7 +4,8 @@ import {
   ImageBackground,
   Dimensions,
   StatusBar,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Alert
 } from "react-native";
 import { Block, Checkbox, Text, theme } from "galio-framework";
 
@@ -14,6 +15,27 @@ import { Images, argonTheme } from "../constants";
 const { width, height } = Dimensions.get("screen");
 
 class Register extends React.Component {
+
+  onSubmit = () => {
+      const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+      if (reg.test(this.state.email) == false) {
+          Alert.alert('Error', 'Ingrese un correo electrónico valido');
+          return;
+      } else if (this.state.password.trim().length < 8) {
+          Alert.alert('Error', 'Ingrese una contraseña valida (debe contener al menos 8 caracteres)');
+          return;
+      }
+      this.props.navigation.navigate("Home");
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: ''
+    };
+  }
+
   render() {
     const { navigation } = this.props;
     
@@ -42,6 +64,7 @@ class Register extends React.Component {
                       <Input
                         borderless
                         placeholder="Email"
+                        onChangeText={(text) => this.setState({ email: text })}
                         iconContent={
                           <Icon
                             size={16}
@@ -58,6 +81,8 @@ class Register extends React.Component {
                         password
                         borderless
                         placeholder="Contraseña"
+                        onChangeText={(text) => this.setState({ password: text })}
+                        maxLength={16}
                         iconContent={
                           <Icon
                             size={16}
@@ -70,7 +95,7 @@ class Register extends React.Component {
                       />
                     </Block>
                     <Block middle>
-                      <Button onPress={() => navigation.navigate("Home")} color="primary" style={styles.createButton}>
+                      <Button onPress={() => this.onSubmit()} color="primary" style={styles.createButton}>
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                           INICIAR SESION
                         </Text>
