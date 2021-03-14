@@ -18,9 +18,10 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
     "Profile",
     "Elements",
     "Articles",
+    "Factura"
   ];
   return (
-    <Block
+    <Block 
       style={styles.container}
       forceInset={{ top: 'always', horizontal: 'never' }}
     >

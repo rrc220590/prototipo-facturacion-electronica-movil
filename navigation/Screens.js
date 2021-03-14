@@ -96,6 +96,8 @@ function ArticlesStack(props) {
   );
 }
 
+
+
 function ProfileStack(props) {
   return (
     <Stack.Navigator initialRouteName="Profile" mode="card" headerMode="screen">
@@ -228,6 +230,7 @@ function AppStack(props) {
       <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen name="Elements" component={ElementsStack} />
       <Drawer.Screen name="Articles" component={ArticlesStack} />
+ 
     </Drawer.Navigator>
   );
 }

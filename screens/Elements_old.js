@@ -20,135 +20,66 @@ class Elements extends React.Component {
   renderButtons = () => {
     return ( 
       <Block flex>
-    
-    <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Text
-            h5
-            style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            color={argonTheme.COLORS.DEFAULT}
-          >
-            Cliente
-          </Text>
-
-        
-        </Block>
-
+        <Text bold size={16} style={styles.title}>
+          Buttons   
+        </Text>
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-     
-
-          <Block row space="evenly">
-
-            <Block flex left style={{height: "100%"}}>
-              <Select
-                defaultIndex={"Seleccione"}
-                options={["Seleccione","Adrian González", "Pedro Flores"]}
-              />
-            </Block>
+          <Block center>
+            <Button color="default" style={styles.button}>
+              DEFAULT
+            </Button>
           </Block>
-        </Block>
-
-        
-
-    <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Text
-            h5
-            style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            color={argonTheme.COLORS.DEFAULT}
-          >
-            Condición de Venta
-          </Text>
-
-        
-        </Block>
-
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-     
-
+          <Block center>
+            <Button
+              color="secondary"
+              textStyle={{ color: "black", fontSize: 12, fontWeight: "700" }}
+              style={styles.button}
+            >
+              SECONDARY
+            </Button>
+          </Block>
+          <Block center>
+            <Button style={styles.button}>PRIMARY</Button>
+          </Block>
+          <Block center>
+            <Button color="info" style={styles.button}>
+              INFO
+            </Button>
+          </Block>
+          <Block center>
+            <Button color="success" style={styles.button}>
+              SUCCESS
+            </Button>
+          </Block>
+          <Block center>
+            <Button color="warning" style={styles.button}>
+              WARNING
+            </Button>
+          </Block>
+          <Block center>
+            <Button color="error" style={styles.button}>
+              ERROR
+            </Button>
+          </Block>
           <Block row space="evenly">
-
             <Block flex left style={{marginTop: 8}}>
               <Select
-                defaultIndex={"Seleccione"}
-                options={["Seleccione",
-                "Contado", 
-                "Crédito",
-                "Consignación",
-                "Apartado",
-                "Arrendamiento con opción de compra",
-                "Arrendamiento en función financiera"
-              ]}
+                defaultIndex={1}
+                options={["01", "02", "03", "04", "05"]}
               />
+            </Block>
+            <Block flex center>
+              <Button small center color="default" style={styles.optionsButton}>
+                DELETE
+              </Button>
+            </Block>
+            <Block flex={1.25} right>
+              <Button center color="default" style={styles.optionsButton}>
+                SAVE FOR LATER
+              </Button>
             </Block>
           </Block>
         </Block>
-
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Text
-            h5
-            style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            color={argonTheme.COLORS.DEFAULT}
-          >
-            Fecha Factura
-          </Text>
-
-        
-        </Block>
-
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-     
-
-          <Block row space="evenly">
-
-            <Block flex left style={{marginTop: 8}}>
-              <Select
-                defaultIndex={"Seleccione"}
-                options={["Seleccione",
-                "Contado", 
-                "Crédito",
-                "Consignación",
-                "Apartado",
-                "Arrendamiento con opción de compra",
-                "Arrendamiento en función financiera"
-              ]}
-              />
-            </Block>
-          </Block>
-        </Block>
-
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Text
-            h5
-            style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            color={argonTheme.COLORS.DEFAULT}
-          >
-            Fecha de Vencimiento
-          </Text>
-
-        
-        </Block>
-
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-     
-
-          <Block row space="evenly">
-
-            <Block flex left style={{marginTop: 8}}>
-              <Select
-                defaultIndex={"Seleccione"}
-                options={["Seleccione",
-                "Contado", 
-                "Crédito",
-                "Consignación",
-                "Apartado",
-                "Arrendamiento con opción de compra",
-                "Arrendamiento en función financiera"
-              ]}
-              />
-            </Block>
-          </Block>
-        </Block>
-
-        
       </Block>
     );
   };
@@ -160,33 +91,47 @@ class Elements extends React.Component {
           Typography
         </Text>
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-      <Text
-            p
+          <Text
+            h1
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
             color={argonTheme.COLORS.DEFAULT}
           >
-            Subtotal 0
+            Heading 1
+          </Text>
+          <Text
+            h2
+            style={{ marginBottom: theme.SIZES.BASE / 2 }}
+            color={argonTheme.COLORS.DEFAULT}
+          >
+            Heading 2
+          </Text>
+          <Text
+            h3
+            style={{ marginBottom: theme.SIZES.BASE / 2 }}
+            color={argonTheme.COLORS.DEFAULT}
+          >
+            Heading 3
+          </Text>
+          <Text
+            h4
+            style={{ marginBottom: theme.SIZES.BASE / 2 }}
+            color={argonTheme.COLORS.DEFAULT}
+          >
+            Heading 4
+          </Text>
+          <Text
+            h5
+            style={{ marginBottom: theme.SIZES.BASE / 2 }}
+            color={argonTheme.COLORS.DEFAULT}
+          >
+            Heading 5
           </Text>
           <Text
             p
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
             color={argonTheme.COLORS.DEFAULT}
           >
-            Descuento 0
-          </Text>
-          <Text
-            p
-            style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            color={argonTheme.COLORS.DEFAULT}
-          >
-            Impuestos 0
-          </Text>
-          <Text
-            p
-            style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            color={argonTheme.COLORS.DEFAULT}
-          >
-            Total 0
+            Paragraph
           </Text>
           <Text muted>This is a muted paragraph.</Text>
         </Block>
