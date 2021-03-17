@@ -46,6 +46,15 @@ class DrawerItem extends React.Component {
             color={focused ? "white" : argonTheme.COLORS.PRIMARY}
           />
         );
+        case "Factura":
+        return (
+          <Icon
+            name="chart-pie-35"
+            family="ArgonExtra"
+            size={14}
+            color={focused ? "white" : argonTheme.COLORS.ERROR}
+          />
+        );
       case "Profile":
         return (
           <Icon
