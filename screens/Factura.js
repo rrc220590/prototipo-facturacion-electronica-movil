@@ -1,12 +1,18 @@
-import React from "react";
-import { ScrollView, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
+import React  from "react";
+import { ScrollView, StyleSheet, Dimensions, TouchableOpacity,StyleSheet, Text } from "react-native";
 // Galio components
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
 // Argon themed components
 import { argonTheme, tabs } from "../constants/";
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
 
+import DatePicker from 'react-native-date-picker'
+import ModalDatePicker from 'react-native-datepicker-modal' 
+import colors from './config/colors'
+import spacing from './config/spacing'
+import fontSize from './config/fontSize'
 const { width } = Dimensions.get("screen");
+const {date} = new Date();
 
 class Factura extends React.Component {
   state = {
@@ -16,6 +22,8 @@ class Factura extends React.Component {
 
   toggleSwitch = switchId =>
     this.setState({ [switchId]: !this.state[switchId] });
+
+
 
   renderButtons = () => {
     return ( 
@@ -91,7 +99,18 @@ class Factura extends React.Component {
             Fecha Factura
           </Text>
 
-        
+          <ModalDatePicker
+
+    renderDate={({ year, month, day, date }) => {
+      if (!date) {
+        return <Text style={[styles.text, styles.placeholderText]}>Date of birth</Text>
+      }
+ 
+      const dateStr = `${day}-${month}-${year}`
+      return <Text style={styles.text}>{dateStr}</Text>
+    }}
+   
+  />
         </Block>
 
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
@@ -100,17 +119,9 @@ class Factura extends React.Component {
           <Block row space="evenly">
 
             <Block flex left style={{marginTop: 8}}>
-              <Select
-                defaultIndex={"Seleccione"}
-                options={["Seleccione",
-                "Contado", 
-                "Crédito",
-                "Consignación",
-                "Apartado",
-                "Arrendamiento con opción de compra",
-                "Arrendamiento en función financiera"
-              ]}
-              />
+            <DatePicker
+      date={new Date()}
+    />
             </Block>
           </Block>
         </Block>
@@ -133,17 +144,9 @@ class Factura extends React.Component {
           <Block row space="evenly">
 
             <Block flex left style={{marginTop: 8}}>
-              <Select
-                defaultIndex={"Seleccione"}
-                options={["Seleccione",
-                "Contado", 
-                "Crédito",
-                "Consignación",
-                "Apartado",
-                "Arrendamiento con opción de compra",
-                "Arrendamiento en función financiera"
-              ]}
-              />
+            <DatePicker
+      date={new Date()}
+    />
             </Block>
           </Block>
         </Block>
