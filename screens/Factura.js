@@ -1,18 +1,12 @@
-import React  from "react";
-import { ScrollView, StyleSheet, Dimensions, TouchableOpacity,StyleSheet, Text } from "react-native";
+import React from "react";
+import { ScrollView, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 // Galio components
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
 // Argon themed components
 import { argonTheme, tabs } from "../constants/";
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
 
-import DatePicker from 'react-native-date-picker'
-import ModalDatePicker from 'react-native-datepicker-modal' 
-import colors from './config/colors'
-import spacing from './config/spacing'
-import fontSize from './config/fontSize'
 const { width } = Dimensions.get("screen");
-const {date} = new Date();
 
 class Factura extends React.Component {
   state = {
@@ -23,13 +17,11 @@ class Factura extends React.Component {
   toggleSwitch = switchId =>
     this.setState({ [switchId]: !this.state[switchId] });
 
-
-
   renderButtons = () => {
-    return ( 
+    return (
       <Block flex>
-    
-    <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+
+        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
           <Text
             h5
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
@@ -38,57 +30,26 @@ class Factura extends React.Component {
             Cliente
           </Text>
 
-        
+
         </Block>
 
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-     
 
-          <Block row space="evenly">
 
-            <Block flex left style={{height: "100%"}}>
+          <Block row space="evenly" style={{ width: "100%" }}>
+
+            <Block flex left style={{ width: "100%" }}>
               <Select
+                color="secondary"
+                textStyle={{ color: "black", fontSize: 12, fontWeight: "700" }}
                 defaultIndex={"Seleccione"}
-                options={["Seleccione","Adrian González", "Pedro Flores"]}
+                options={["Seleccione", "Adrian González", "Pedro Flores"]}
               />
             </Block>
           </Block>
         </Block>
 
-        
 
-    <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Text
-            h5
-            style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            color={argonTheme.COLORS.DEFAULT}
-          >
-            Condición de Venta
-          </Text>
-
-        
-        </Block>
-
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-     
-
-          <Block row space="evenly">
-
-            <Block flex left style={{marginTop: 8}}>
-              <Select
-                defaultIndex={"Seleccione"}
-                options={["Seleccione",
-                "Contado", 
-                "Crédito",
-                "Consignación",
-                "Apartado",
-                "Arrendamiento con opción de compra",
-                "Arrendamiento en función financiera"
-              ]}
-              />
-            </Block>
-          </Block>
-        </Block>
 
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
           <Text
@@ -99,29 +60,26 @@ class Factura extends React.Component {
             Fecha Factura
           </Text>
 
-          <ModalDatePicker
 
-    renderDate={({ year, month, day, date }) => {
-      if (!date) {
-        return <Text style={[styles.text, styles.placeholderText]}>Date of birth</Text>
-      }
- 
-      const dateStr = `${day}-${month}-${year}`
-      return <Text style={styles.text}>{dateStr}</Text>
-    }}
-   
-  />
         </Block>
 
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-     
+
 
           <Block row space="evenly">
 
-            <Block flex left style={{marginTop: 8}}>
-            <DatePicker
-      date={new Date()}
-    />
+            <Block flex left style={{ marginTop: 8 }}>
+              <Select
+                defaultIndex={"Seleccione"}
+                options={["Seleccione",
+                  "Contado",
+                  "Crédito",
+                  "Consignación",
+                  "Apartado",
+                  "Arrendamiento con opción de compra",
+                  "Arrendamiento en función financiera"
+                ]}
+              />
             </Block>
           </Block>
         </Block>
@@ -135,23 +93,96 @@ class Factura extends React.Component {
             Fecha de Vencimiento
           </Text>
 
-        
+
         </Block>
 
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-     
+
 
           <Block row space="evenly">
 
-            <Block flex left style={{marginTop: 8}}>
-            <DatePicker
-      date={new Date()}
-    />
+            <Block flex left style={{ marginTop: 8 }}>
+              <Select
+                defaultIndex={"Seleccione"}
+                options={["Seleccione",
+                  "Contado",
+                  "Crédito",
+                  "Consignación",
+                  "Apartado",
+                  "Arrendamiento con opción de compra",
+                  "Arrendamiento en función financiera"
+                ]}
+              />
+            </Block>
+          </Block>
+        </Block>
+        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+          <Text
+            h5
+            style={{ marginBottom: theme.SIZES.BASE / 2 }}
+            color={argonTheme.COLORS.DEFAULT}
+          >
+            Condición de Venta
+          </Text>
+
+
+        </Block>
+
+        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+
+
+          <Block row space="evenly">
+
+            <Block flex left style={{ marginTop: 8 }}>
+              <Select
+                defaultIndex={"Seleccione"}
+                options={["Seleccione",
+                  "Contado",
+                  "Crédito",
+                  "Consignación",
+                  "Apartado",
+                  "Arrendamiento con opción de compra",
+                  "Arrendamiento en función financiera"
+                ]}
+              />
             </Block>
           </Block>
         </Block>
 
-        
+        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+          <Text
+            h5
+            style={{ marginBottom: theme.SIZES.BASE / 2 }}
+            color={argonTheme.COLORS.DEFAULT}
+          >
+            Medio de Pago
+          </Text>
+
+
+        </Block>
+
+        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+
+
+          <Block row space="evenly">
+
+            <Block flex left style={{ marginTop: 8 }}>
+              <Select
+                defaultIndex={"Seleccione"}
+                options={["Seleccione",
+                  "Efectivo",
+                  "Tarjeta",
+                  "Cheque",
+                  "Transferencia - depósito bancario",
+                  "Recaudado por terceros",
+                  "Otros"
+                ]}
+              />
+            </Block>
+          </Block>
+        </Block>
+
+
       </Block>
     );
   };
@@ -163,7 +194,7 @@ class Factura extends React.Component {
           Typography
         </Text>
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-      <Text
+          <Text
             p
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
             color={argonTheme.COLORS.DEFAULT}
@@ -191,7 +222,7 @@ class Factura extends React.Component {
           >
             Total 0
           </Text>
-          <Text muted>This is a muted paragraph.</Text>
+     
         </Block>
       </Block>
     );
@@ -199,105 +230,29 @@ class Factura extends React.Component {
 
   renderInputs = () => {
     return (
-      <Block flex style={styles.group}>
-        <Text bold size={16} style={styles.title}>
-          Inputs
-        </Text>
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Input right placeholder="Regular" iconContent={<Block />} />
-        </Block>
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Input
-            right
-            placeholder="Regular Custom"
-            style={{
-              borderColor: argonTheme.COLORS.INFO,
-              borderRadius: 4,
-              backgroundColor: "#fff"
-            }}
-            iconContent={<Block />}
-          />
-        </Block>
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Input
-            placeholder="Icon left"
-            iconContent={
-              <Icon
-                size={11}
-                style={{ marginRight: 10 }}
-                color={argonTheme.COLORS.ICON}
-                name="search-zoom-in"
-                family="ArgonExtra"
-              />
-            }
-          />
-        </Block>
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Input
-            right
-            placeholder="Icon Right"
-            iconContent={
-              <Icon
-                size={11}
-                color={argonTheme.COLORS.ICON}
-                name="search-zoom-in"
-                family="ArgonExtra"
-              />
-            }
-          />
-        </Block>
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Input
-            success
-            right
-            placeholder="Success"
-            iconContent={
-              <Block
-                middle
-                style={{
-                  width: 20,
-                  height: 20,
-                  borderRadius: 10,
-                  backgroundColor: argonTheme.COLORS.INPUT_SUCCESS
-                }}
+       
+        <Block flex>
+         
+          <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+            <Block center>
+              <Button color="default" style={styles.button}>
+                Guardar
+              </Button>
+            </Block>
+            <Block center>
+              <Button
+                color="secondary"
+                textStyle={{ color: "black", fontSize: 12, fontWeight: "700" }}
+                style={styles.button}
               >
-                <Icon
-                  size={11}
-                  color={argonTheme.COLORS.ICON}
-                  name="g-check"
-                  family="ArgonExtra"
-                />
-              </Block>
-            }
-          />
+                Cancelar
+              </Button>
+            </Block>
+           
+          </Block>
         </Block>
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Input
-            error
-            right
-            placeholder="Error Input"
-            iconContent={
-              <Block
-                middle
-                style={{
-                  width: 20,
-                  height: 20,
-                  borderRadius: 10,
-                  backgroundColor: argonTheme.COLORS.INPUT_ERROR
-                }}
-              >
-                <Icon
-                  size={11}
-                  color={argonTheme.COLORS.ICON}
-                  name="support"
-                  family="ArgonExtra"
-                />
-              </Block>
-            }
-          />
-        </Block>
-      </Block>
-    );
+      );
+    
   };
 
   renderSwitches = () => {
@@ -454,14 +409,18 @@ class Factura extends React.Component {
           {this.renderButtons()}
           {this.renderText()}
           {this.renderInputs()}
-          {this.renderSocial()}
-          {this.renderSwitches()}
-          {this.renderNavigation()}
-          {this.renderTableCell()}
         </ScrollView>
       </Block>
     );
   }
+
+  /*
+       {this.renderInputs()}
+          {this.renderSocial()}
+          {this.renderSwitches()}
+          {this.renderNavigation()}
+          {this.renderTableCell()}
+  */
 }
 
 const styles = StyleSheet.create({
