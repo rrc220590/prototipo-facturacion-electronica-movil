@@ -6,6 +6,8 @@ import { Block, Text, Button as GaButton, theme } from "galio-framework";
 import { argonTheme, tabs } from "../constants/";
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
 
+import DatePicker from 'react-native-datepicker'
+
 const { width } = Dimensions.get("screen");
 
 class Factura extends React.Component {
@@ -42,7 +44,7 @@ class Factura extends React.Component {
               <Select
                 color="secondary"
                 textStyle={{ color: "black", fontSize: 12, fontWeight: "700" }}
-                defaultIndex={"Seleccione"}
+                defaultIndex={1}
                 options={["Seleccione", "Adrian González", "Pedro Flores"]}
               />
             </Block>
@@ -69,16 +71,8 @@ class Factura extends React.Component {
           <Block row space="evenly">
 
             <Block flex left style={{ marginTop: 8 }}>
-              <Select
-                defaultIndex={"Seleccione"}
-                options={["Seleccione",
-                  "Contado",
-                  "Crédito",
-                  "Consignación",
-                  "Apartado",
-                  "Arrendamiento con opción de compra",
-                  "Arrendamiento en función financiera"
-                ]}
+              <DatePicker
+                date={new Date()}
               />
             </Block>
           </Block>
@@ -102,16 +96,8 @@ class Factura extends React.Component {
           <Block row space="evenly">
 
             <Block flex left style={{ marginTop: 8 }}>
-              <Select
-                defaultIndex={"Seleccione"}
-                options={["Seleccione",
-                  "Contado",
-                  "Crédito",
-                  "Consignación",
-                  "Apartado",
-                  "Arrendamiento con opción de compra",
-                  "Arrendamiento en función financiera"
-                ]}
+              <DatePicker
+                date={new Date()}
               />
             </Block>
           </Block>
@@ -135,7 +121,7 @@ class Factura extends React.Component {
 
             <Block flex left style={{ marginTop: 8 }}>
               <Select
-                defaultIndex={"Seleccione"}
+                defaultIndex={1}
                 options={["Seleccione",
                   "Contado",
                   "Crédito",
@@ -168,7 +154,7 @@ class Factura extends React.Component {
 
             <Block flex left style={{ marginTop: 8 }}>
               <Select
-                defaultIndex={"Seleccione"}
+                defaultIndex={1}
                 options={["Seleccione",
                   "Efectivo",
                   "Tarjeta",
