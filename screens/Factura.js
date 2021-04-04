@@ -6,11 +6,48 @@ import { Block, Text, Button as GaButton, theme } from "galio-framework";
 import { argonTheme, tabs } from "../constants/";
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
 
-import DatePicker from 'react-native-datepicker'
+import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 
 const { width } = Dimensions.get("screen");
 
 class Factura extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date(),
+      mode: 'date', //Se puede utilizar time tambien
+      isVisible: false,
+      fechaFactura: ''
+    };
+  }
+
+  showPicker = () => {
+    this.setState({
+      isVisible: true
+    })
+    console.log('Mostrar datePicker: ' + this.state.isVisible)
+  }
+
+  handlePicker = () => {
+    this.setState({
+      isVisible: false
+    })
+  }
+
+  hidePicker = () => {
+    this.setState({
+      isVisible: false
+    })
+  }
+
+  onChange = (event, selectedDate) => {
+    this.setState({
+      fechaFactura: moment(selectedDate).format("MMM Do YY")
+    })
+  }
+  
   state = {
     "switch-1": true,
     "switch-2": false
@@ -71,8 +108,20 @@ class Factura extends React.Component {
           <Block row space="evenly">
 
             <Block flex left style={{ marginTop: 8 }}>
-              <DatePicker
-                date={new Date()}
+              <Text style={{ color: 'red' }}>
+                {this.state.fechaFactura}
+              </Text>
+              <Button color="default" style={styles.button} onPress={this.showPicker}>
+                Mostrar DatePicker
+              </Button>
+              <DateTimePicker
+                value={this.state.date}
+                mode={this.state.mode}
+                display="default"
+                onChange={this.onChange}
+                isVisible={this.state.isVisible}
+                onConfirm={this.handlePicker}
+                onCancel={this.hidePicker}
               />
             </Block>
           </Block>
@@ -96,9 +145,7 @@ class Factura extends React.Component {
           <Block row space="evenly">
 
             <Block flex left style={{ marginTop: 8 }}>
-              <DatePicker
-                date={new Date()}
-              />
+              
             </Block>
           </Block>
         </Block>
