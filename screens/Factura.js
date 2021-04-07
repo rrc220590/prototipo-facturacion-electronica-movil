@@ -75,13 +75,12 @@ class Factura extends React.Component {
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
 
 
-          <Block row space="evenly" style={{ width: "100%" }}>
+          <Block >
 
-            <Block flex left style={{ width: "100%" }}>
+            <Block center>
               <Select
-                color="secondary"
-                textStyle={{ color: "black", fontSize: 12, fontWeight: "700" }}
-                defaultIndex={1}
+                style={styles.button}
+              
                 options={["Seleccione", "Adrian González", "Pedro Flores"]}
               />
             </Block>
@@ -164,11 +163,12 @@ class Factura extends React.Component {
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
 
 
-          <Block row space="evenly">
+          <Block >
 
-            <Block flex left style={{ marginTop: 8 }}>
+            <Block center>
               <Select
-                defaultIndex={1}
+              style={styles.button}
+              
                 options={["Seleccione",
                   "Contado",
                   "Crédito",
@@ -197,11 +197,11 @@ class Factura extends React.Component {
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
 
 
-          <Block row space="evenly">
+          <Block >
 
-            <Block flex left style={{ marginTop: 8 }}>
+            <Block center>
               <Select
-                defaultIndex={1}
+                style={styles.button}
                 options={["Seleccione",
                   "Efectivo",
                   "Tarjeta",
@@ -224,7 +224,7 @@ class Factura extends React.Component {
     return (
       <Block flex style={styles.group}>
         <Text bold size={16} style={styles.title}>
-          Typography
+          -----------------------------------
         </Text>
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
           <Text
