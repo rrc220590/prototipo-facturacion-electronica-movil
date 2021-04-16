@@ -18,33 +18,21 @@ class Factura extends React.Component {
     this.state = {
       date: new Date(),
       mode: 'date', //Se puede utilizar time tambien
-      isVisible: false,
+      show: false,
       fechaFactura: ''
     };
   }
 
   showPicker = () => {
     this.setState({
-      isVisible: true
-    })
-    console.log('Mostrar datePicker: ' + this.state.isVisible)
-  }
-
-  handlePicker = () => {
-    this.setState({
-      isVisible: false
-    })
-  }
-
-  hidePicker = () => {
-    this.setState({
-      isVisible: false
+      show: true
     })
   }
 
   onChange = (event, selectedDate) => {
     this.setState({
-      fechaFactura: moment(selectedDate).format("MMM Do YY")
+      fechaFactura: moment(selectedDate).format("DD/MM/YYYY"),
+      show: false
     })
   }
   
@@ -113,15 +101,13 @@ class Factura extends React.Component {
               <Button color="default" style={styles.button} onPress={this.showPicker}>
                 Mostrar DatePicker
               </Button>
-              <DateTimePicker
-                value={this.state.date}
-                mode={this.state.mode}
-                display="default"
-                onChange={this.onChange}
-                isVisible={this.state.isVisible}
-                onConfirm={this.handlePicker}
-                onCancel={this.hidePicker}
-              />
+              { this.state.show && <DateTimePicker
+                          minimumDate={new Date(1980, 1, 1)}
+                          maximumDate={new Date(2099, 12, 31)}
+                          onChange={this.onChange}
+                          value={this.state.date}
+                        />
+            }
             </Block>
           </Block>
         </Block>
