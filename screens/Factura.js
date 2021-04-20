@@ -1,5 +1,6 @@
-import React from "react";
-import { ScrollView, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
+import React, { Component } from "react";
+
+import {Alert, Modal, Pressable,View,ScrollView, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 // Galio components
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
 // Argon themed components
@@ -19,13 +20,20 @@ class Factura extends React.Component {
       date: new Date(),
       mode: 'date', //Se puede utilizar time tambien
       show: false,
-      fechaFactura: ''
+      fechaFactura: '',
+      modalVisible:false
     };
   }
 
   showPicker = () => {
     this.setState({
       show: true
+    })
+  }
+
+  setModalVisible=(visible)=>{
+    this.setState({
+      modalVisible: visible
     })
   }
 
@@ -209,6 +217,34 @@ class Factura extends React.Component {
   renderText = () => {
     return (
       <Block flex style={styles.group}>
+           <Block center>
+              <Button color="default" style={styles.button}  onPress={() => this.setModalVisible(!this.state.modalVisible)}>
+                Agregar Línea
+              </Button>
+              <Modal
+        animationType="slide"
+        transparent={true}
+        visible={this.state.modalVisible}
+        
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+         this.setModalVisible(!this.state.modalVisible);
+        }}
+      > 
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => this.setModalVisible(!this.state.modalVisible)}
+            >
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+            </Block>
+         
         <Text bold size={16} style={styles.title}>
           -----------------------------------
         </Text>
@@ -461,7 +497,10 @@ const styles = StyleSheet.create({
   },
   button: {
     marginBottom: theme.SIZES.BASE,
-    width: width - theme.SIZES.BASE * 2
+    width: width - theme.SIZES.BASE * 2,
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
   },
   optionsButton: {
     width: "auto",
@@ -496,6 +535,42 @@ const styles = StyleSheet.create({
     borderRadius: theme.SIZES.BASE * 1.75,
     justifyContent: "center"
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
 });
 
 export default Factura;
