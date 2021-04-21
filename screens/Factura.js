@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ModalDropdown from 'react-native-modal-dropdown';
 
 import {Alert, Modal, Pressable,View,ScrollView, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 // Galio components
@@ -13,6 +14,7 @@ import moment from 'moment';
 const { width } = Dimensions.get("screen");
 
 class Factura extends React.Component {
+  
   
   constructor(props) {
     super(props);
@@ -83,7 +85,7 @@ class Factura extends React.Component {
           </Block>
         </Block>
 
-
+        
 
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
           <Text
@@ -237,37 +239,9 @@ class Factura extends React.Component {
               
           <Input right placeholder="Cantidad" iconContent={<Block />} />
 
-          <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Text
-            h5
-            style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            color={argonTheme.COLORS.DEFAULT}
-          >
-            Unidad de Medida
-          </Text>
 
+        <ModalDropdown defaultValue="Seleccione una unidad de medida" options={['Unidad', 'Metro','Kilogramo','Libro','Servicios Profesionales']}/>
 
-        </Block>
-
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-
-
-          <Block >
-
-            <Block center>
-              <Select
-                style={styles.button}
-                options={["Seleccione",
-                  "Unidad",
-                  "Metro",
-                  "Kilogramo",
-                  "Libro",
-                  "Servicios Profesionales"
-                ]}
-              />
-            </Block>
-          </Block>
-        </Block>
         <Input right placeholder="Descripción" iconContent={<Block />} />
         <Input right placeholder="Precio Unitario" iconContent={<Block />} />
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
