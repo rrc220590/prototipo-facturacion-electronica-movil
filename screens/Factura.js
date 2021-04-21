@@ -233,18 +233,117 @@ class Factura extends React.Component {
       > 
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <Text style={styles.modalText}>Nueva Línea!</Text>
+              
+          <Input right placeholder="Cantidad" iconContent={<Block />} />
+
+          <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+          <Text
+            h5
+            style={{ marginBottom: theme.SIZES.BASE / 2 }}
+            color={argonTheme.COLORS.DEFAULT}
+          >
+            Unidad de Medida
+          </Text>
+
+
+        </Block>
+
+        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+
+
+          <Block >
+
+            <Block center>
+              <Select
+                style={styles.button}
+                options={["Seleccione",
+                  "Unidad",
+                  "Metro",
+                  "Kilogramo",
+                  "Libro",
+                  "Servicios Profesionales"
+                ]}
+              />
+            </Block>
+          </Block>
+        </Block>
+        <Input right placeholder="Descripción" iconContent={<Block />} />
+        <Input right placeholder="Precio Unitario" iconContent={<Block />} />
+        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+          <Text
+            h5
+            style={{ marginBottom: theme.SIZES.BASE / 2 }}
+            color={argonTheme.COLORS.DEFAULT}
+          >
+            Impuesto
+          </Text>
+
+
+        </Block>
+
+        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+
+
+          <Block >
+
+            <Block center>
+              <Select
+                style={styles.button}
+                options={["Seleccione",
+                  "Impuesto General sobre las ventas",
+                  "Impuesto Selectivo de Consumo",
+                  "Impuesto único a los combustibles",
+                  "Impuesto específico a bebidas alcohólicas",
+                  "Impuesto a los productos de tabaco",
+                  "Arredamiento en función financiera"
+                ]}
+              />
+            </Block>
+          </Block>
+        </Block>
+        <Input right placeholder="Porcentaje de Descuento" iconContent={<Block />} />
+        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+          <Text
+            h5
+            style={{ marginBottom: theme.SIZES.BASE / 2 }}
+            color={argonTheme.COLORS.DEFAULT}
+          >
+            Moneda
+          </Text>
+
+
+        </Block>
+
+        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+
+
+          <Block >
+
+            <Block center>
+              <Select
+                style={styles.button}
+                options={["Seleccione",
+                  "CRC",
+                  "USD"
+                ]}
+              />
+            </Block>
+          </Block>
+        </Block>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => this.setModalVisible(!this.state.modalVisible)}
             >
+                 
               <Text style={styles.textStyle}>Hide Modal</Text>
             </Pressable>
           </View>
+          
         </View>
       </Modal>
             </Block>
-         
+            
         <Text bold size={16} style={styles.title}>
           -----------------------------------
         </Text>
