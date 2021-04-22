@@ -244,73 +244,47 @@ class Factura extends React.Component {
 
         <Input right placeholder="Descripción" iconContent={<Block />} />
         <Input right placeholder="Precio Unitario" iconContent={<Block />} />
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Text
-            h5
-            style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            color={argonTheme.COLORS.DEFAULT}
-          >
-            Impuesto
-          </Text>
 
-
-        </Block>
-
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-
-
-          <Block >
-
-            <Block center>
-              <Select
-                style={styles.button}
-                options={["Seleccione",
-                  "Impuesto General sobre las ventas",
+        <ModalDropdown defaultValue="Impuesto" options={["Impuesto General sobre las ventas",
                   "Impuesto Selectivo de Consumo",
                   "Impuesto único a los combustibles",
                   "Impuesto específico a bebidas alcohólicas",
                   "Impuesto a los productos de tabaco",
-                  "Arredamiento en función financiera"
-                ]}
-              />
-            </Block>
-          </Block>
-        </Block>
+                  "Arredamiento en función financiera"]}/>
+
+      
         <Input right placeholder="Porcentaje de Descuento" iconContent={<Block />} />
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-          <Text
-            h5
-            style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            color={argonTheme.COLORS.DEFAULT}
-          >
-            Moneda
-          </Text>
 
-
-        </Block>
-
-        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-
-
-          <Block >
-
-            <Block center>
-              <Select
-                style={styles.button}
-                options={["Seleccione",
-                  "CRC",
-                  "USD"
-                ]}
-              />
-            </Block>
-          </Block>
-        </Block>
+        <ModalDropdown defaultValue="Moneda" options={[
+             "CRC",
+             "USD"
+        ]}/>
+        <Input right placeholder="Porcentaje de Descuento" iconContent={<Block />} />
+        <ModalDropdown defaultValue="Impuesto" options={[
+             "Impuesto General de Ventas",
+             "Impuesto Selectivo de Consumo",
+             "Impuesto Único a los combustibles",
+             "Impuesto Específico a bebidas alcohólicas",
+             "Impuesto a los productos del tabaco",
+             "Arrendamiento de función financiera",
+             "Impuesto Específico sobre las bebidas envasadas sin contenido alcohólico y jabones de tocador",
+        ]}/>
+        <Input right placeholder="Porcentaje de Impuesto" iconContent={<Block />} />
+        <Input right placeholder="Total" iconContent={<Block />} />
+      
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => this.setModalVisible(!this.state.modalVisible)}
             >
                  
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>Agregar</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => this.setModalVisible(!this.state.modalVisible)}
+            >
+                 
+              <Text style={styles.textStyle}>Cancelar</Text>
             </Pressable>
           </View>
           
