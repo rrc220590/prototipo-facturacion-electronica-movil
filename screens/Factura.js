@@ -23,11 +23,13 @@ class Factura extends React.Component {
       mode: 'date', //Se puede utilizar time tambien
       show: false,
       fechaFactura: '',
+      fechaVencimiento: '',
       modalVisible:false
     };
   }
 
   showPicker = () => {
+    console.log("MENSAJE");
     this.setState({
       show: true
     })
@@ -113,9 +115,30 @@ class Factura extends React.Component {
           <Block row space="evenly">
 
             <Block flex left style={{ marginTop: 8 }}>
-              <Text style={{ color: 'red' }}>
-                {this.state.fechaFactura}
-              </Text>
+              <Input
+                  right
+                  placeholder="Ingrese fecha de factura"
+                  value={this.state.fechaFactura}
+                  editable = {false}
+                  iconContent={
+                    <Block
+                      middle
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 10
+                      }}
+                    >
+                      <Icon
+                        size={11}
+                        color={argonTheme.COLORS.ICON}
+                        name="calendar-date"
+                        family="ArgonExtra"
+                      />
+                    </Block>
+                  }
+                />
+              
               <Button color="default" style={styles.button} onPress={this.showPicker}>
                 Mostrar DatePicker
               </Button>
@@ -148,7 +171,29 @@ class Factura extends React.Component {
           <Block row space="evenly">
 
             <Block flex left style={{ marginTop: 8 }}>
-              
+            <Input
+                  right
+                  placeholder="Ingrese fecha de vencimiento"
+                  value={this.state.fechaVencimiento}
+                  editable = {false}
+                  iconContent={
+                    <Block
+                      middle
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 10
+                      }}
+                    >
+                      <Icon
+                        size={11}
+                        color={argonTheme.COLORS.ICON}
+                        name="calendar-date"
+                        family="ArgonExtra"
+                      />
+                    </Block>
+                  }
+                />
             </Block>
           </Block>
         </Block>
