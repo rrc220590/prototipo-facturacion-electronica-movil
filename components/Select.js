@@ -9,7 +9,7 @@ import { argonTheme } from '../constants';
 
 class DropDown extends React.Component {
   state = {
-    value: 1,
+    value: 'Seleccione una opción',
   }
 
   handleOnSelect = (index, value) => {
@@ -37,11 +37,11 @@ class DropDown extends React.Component {
       <ModalDropdown
         style={modalStyles}
         onSelect={this.handleOnSelect}
-        dropdownStyle={styles.dropdown}
-        dropdownTextStyle={{paddingLeft:16, fontSize:12}}
+        dropdownStyle={styles.select}
+        dropdownTextStyle={{paddingLeft:16, fontSize:14, color:"black"}}
         {...props}>
         <Block flex row middle space="between">
-          <Text size={12} style={textStyles}>{this.state.value}</Text>
+          <Text size={14} style={textStyles}>{this.state.value}</Text>
           <Icon name={iconName || "nav-down"} family={iconFamily || "ArgonExtra"} size={iconSize || 10} color={iconColor || argonTheme.COLORS.WHITE} />
         </Block>
       </ModalDropdown>

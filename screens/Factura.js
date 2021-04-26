@@ -79,7 +79,15 @@ class Factura extends React.Component {
               <Select
                 style={styles.button}
               
-                options={["Seleccione", "Adrian González", "Pedro Flores"]}
+                options={["Adrian González Hernández  ", 
+                          "Gilberto Duran Luna", 
+                          "Laura Acevedo Rodríguez", 
+                          "Miriam Fernández Campos", 
+                          "Naomy Barrientos Chacón", 
+                          "Paola Nuñez Guerrero", 
+                          "Pedro Flores Camacho",
+                          "Teresa Perez Asturias",
+                          "Zamira Bolaños Sánchez"]}
               />
             </Block>
           </Block>
@@ -165,13 +173,12 @@ class Factura extends React.Component {
               <Select
               style={styles.button}
               
-                options={["Seleccione",
-                  "Contado",
-                  "Crédito",
-                  "Consignación",
-                  "Apartado",
-                  "Arrendamiento con opción de compra",
-                  "Arrendamiento en función financiera"
+                options={["Contado",
+                          "Crédito",
+                          "Consignación",
+                          "Apartado",
+                          "Arrendamiento con opción de compra  ",
+                          "Arrendamiento en función financiera"
                 ]}
               />
             </Block>
@@ -198,11 +205,10 @@ class Factura extends React.Component {
             <Block center>
               <Select
                 style={styles.button}
-                options={["Seleccione",
-                  "Efectivo",
+                options={["Efectivo",
                   "Tarjeta",
                   "Cheque",
-                  "Transferencia - depósito bancario",
+                  "Transferencia - depósito bancario  ",
                   "Recaudado por terceros",
                   "Otros"
                 ]}
