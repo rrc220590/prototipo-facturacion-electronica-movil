@@ -218,6 +218,7 @@ class Factura extends React.Component {
 
   renderText = () => {
     return (
+      
       <Block flex style={styles.group}>
            <Block center>
               <Button color="default" style={styles.button}  onPress={() => this.setModalVisible(!this.state.modalVisible)}>
@@ -286,6 +287,7 @@ class Factura extends React.Component {
                  
               <Text style={styles.textStyle}>Cancelar</Text>
             </Pressable>
+
           </View>
           
         </View>
@@ -296,6 +298,12 @@ class Factura extends React.Component {
           -----------------------------------
         </Text>
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+          
+        <Block>
+        <Block style={{ marginBottom: theme.SIZES.BASE }}>
+            <Header tabs={tabs.categories}   title="Líneas de Factura" />
+          </Block>
+        </Block>
           <Text
             p
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
@@ -334,7 +342,6 @@ class Factura extends React.Component {
     return (
        
         <Block flex>
-         
           <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
             <Block center>
               <Button color="default" style={styles.button}>
