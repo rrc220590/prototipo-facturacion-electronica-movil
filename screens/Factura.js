@@ -29,7 +29,6 @@ class Factura extends React.Component {
   }
 
   showPicker = () => {
-    console.log("MENSAJE");
     this.setState({
       show: true
     })
