@@ -21,29 +21,43 @@ class Factura extends React.Component {
     this.state = {
       date: new Date(),
       mode: 'date', //Se puede utilizar time tambien
-      show: false,
+      showFechaFactura: false,
+      showFechaVencimiento: false,
       fechaFactura: '',
       fechaVencimiento: '',
       modalVisible:false
     };
   }
 
-  showPicker = () => {
+  showPickerFechaFactura = () => {
     this.setState({
-      show: true
+      showFechaFactura: true,
+    })
+  }
+
+  onChangeFechaFactura = (event, selectedDate) => {
+    this.setState({
+      fechaFactura: moment(selectedDate).format("DD/MM/YYYY"),
+      showFechaFactura: false
+    })
+  }
+
+  showPickerFechaVencimiento = () => {
+    this.setState({
+      showFechaVencimiento: true
+    })
+  }
+
+  onChangeFechaVencimiento = (event, selectedDate) => {
+    this.setState({
+      fechaVencimiento: moment(selectedDate).format("DD/MM/YYYY"),
+      showFechaVencimiento: false
     })
   }
 
   setModalVisible=(visible)=>{
     this.setState({
       modalVisible: visible
-    })
-  }
-
-  onChange = (event, selectedDate) => {
-    this.setState({
-      fechaFactura: moment(selectedDate).format("DD/MM/YYYY"),
-      show: false
     })
   }
   
@@ -118,7 +132,8 @@ class Factura extends React.Component {
                   right
                   placeholder="Ingrese fecha de factura"
                   value={this.state.fechaFactura}
-                  editable = {false}
+                  editable = {true}
+                  onFocus={this.showPickerFechaFactura}
                   iconContent={
                     <Block
                       middle
@@ -136,18 +151,14 @@ class Factura extends React.Component {
                       />
                     </Block>
                   }
+              />
+              { this.state.showFechaFactura && <DateTimePicker
+                  minimumDate={new Date(1980, 1, 1)}
+                  maximumDate={new Date(2099, 12, 31)}
+                  onChange={this.onChangeFechaFactura}
+                  value={this.state.date}
                 />
-              
-              <Button color="default" style={styles.button} onPress={this.showPicker}>
-                Mostrar DatePicker
-              </Button>
-              { this.state.show && <DateTimePicker
-                          minimumDate={new Date(1980, 1, 1)}
-                          maximumDate={new Date(2099, 12, 31)}
-                          onChange={this.onChange}
-                          value={this.state.date}
-                        />
-            }
+              }
             </Block>
           </Block>
         </Block>
@@ -170,11 +181,12 @@ class Factura extends React.Component {
           <Block row space="evenly">
 
             <Block flex left style={{ marginTop: 8 }}>
-            <Input
+              <Input
                   right
                   placeholder="Ingrese fecha de vencimiento"
                   value={this.state.fechaVencimiento}
-                  editable = {false}
+                  editable = {true}
+                  onFocus={this.showPickerFechaVencimiento}
                   iconContent={
                     <Block
                       middle
@@ -192,7 +204,14 @@ class Factura extends React.Component {
                       />
                     </Block>
                   }
+              />
+              { this.state.showFechaVencimiento && <DateTimePicker
+                  minimumDate={new Date(1980, 1, 1)}
+                  maximumDate={new Date(2099, 12, 31)}
+                  onChange={this.onChangeFechaVencimiento}
+                  value={this.state.date}
                 />
+              }
             </Block>
           </Block>
         </Block>
