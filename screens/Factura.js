@@ -21,28 +21,43 @@ class Factura extends React.Component {
     this.state = {
       date: new Date(),
       mode: 'date', //Se puede utilizar time tambien
-      show: false,
+      showFechaFactura: false,
+      showFechaVencimiento: false,
       fechaFactura: '',
+      fechaVencimiento: '',
       modalVisible:false
     };
   }
 
-  showPicker = () => {
+  showPickerFechaFactura = () => {
     this.setState({
-      show: true
+      showFechaFactura: true,
+    })
+  }
+
+  onChangeFechaFactura = (event, selectedDate) => {
+    this.setState({
+      fechaFactura: moment(selectedDate).format("DD/MM/YYYY"),
+      showFechaFactura: false
+    })
+  }
+
+  showPickerFechaVencimiento = () => {
+    this.setState({
+      showFechaVencimiento: true
+    })
+  }
+
+  onChangeFechaVencimiento = (event, selectedDate) => {
+    this.setState({
+      fechaVencimiento: moment(selectedDate).format("DD/MM/YYYY"),
+      showFechaVencimiento: false
     })
   }
 
   setModalVisible=(visible)=>{
     this.setState({
       modalVisible: visible
-    })
-  }
-
-  onChange = (event, selectedDate) => {
-    this.setState({
-      fechaFactura: moment(selectedDate).format("DD/MM/YYYY"),
-      show: false
     })
   }
   
@@ -79,7 +94,15 @@ class Factura extends React.Component {
               <Select
                 style={styles.button}
               
-                options={["Seleccione", "Adrian González", "Pedro Flores"]}
+                options={["Adrian González Hernández  ", 
+                          "Gilberto Duran Luna", 
+                          "Laura Acevedo Rodríguez", 
+                          "Miriam Fernández Campos", 
+                          "Naomy Barrientos Chacón", 
+                          "Paola Nuñez Guerrero", 
+                          "Pedro Flores Camacho",
+                          "Teresa Perez Asturias",
+                          "Zamira Bolaños Sánchez"]}
               />
             </Block>
           </Block>
@@ -105,19 +128,37 @@ class Factura extends React.Component {
           <Block row space="evenly">
 
             <Block flex left style={{ marginTop: 8 }}>
-              <Text style={{ color: 'red' }}>
-                {this.state.fechaFactura}
-              </Text>
-              <Button color="default" style={styles.button} onPress={this.showPicker}>
-                Mostrar DatePicker
-              </Button>
-              { this.state.show && <DateTimePicker
-                          minimumDate={new Date(1980, 1, 1)}
-                          maximumDate={new Date(2099, 12, 31)}
-                          onChange={this.onChange}
-                          value={this.state.date}
-                        />
-            }
+              <Input
+                  right
+                  placeholder="Ingrese fecha de factura"
+                  value={this.state.fechaFactura}
+                  editable = {true}
+                  onFocus={this.showPickerFechaFactura}
+                  iconContent={
+                    <Block
+                      middle
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 10
+                      }}
+                    >
+                      <Icon
+                        size={11}
+                        color={argonTheme.COLORS.ICON}
+                        name="calendar-date"
+                        family="ArgonExtra"
+                      />
+                    </Block>
+                  }
+              />
+              { this.state.showFechaFactura && <DateTimePicker
+                  minimumDate={new Date(1980, 1, 1)}
+                  maximumDate={new Date(2099, 12, 31)}
+                  onChange={this.onChangeFechaFactura}
+                  value={this.state.date}
+                />
+              }
             </Block>
           </Block>
         </Block>
@@ -140,7 +181,37 @@ class Factura extends React.Component {
           <Block row space="evenly">
 
             <Block flex left style={{ marginTop: 8 }}>
-              
+              <Input
+                  right
+                  placeholder="Ingrese fecha de vencimiento"
+                  value={this.state.fechaVencimiento}
+                  editable = {true}
+                  onFocus={this.showPickerFechaVencimiento}
+                  iconContent={
+                    <Block
+                      middle
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 10
+                      }}
+                    >
+                      <Icon
+                        size={11}
+                        color={argonTheme.COLORS.ICON}
+                        name="calendar-date"
+                        family="ArgonExtra"
+                      />
+                    </Block>
+                  }
+              />
+              { this.state.showFechaVencimiento && <DateTimePicker
+                  minimumDate={new Date(1980, 1, 1)}
+                  maximumDate={new Date(2099, 12, 31)}
+                  onChange={this.onChangeFechaVencimiento}
+                  value={this.state.date}
+                />
+              }
             </Block>
           </Block>
         </Block>
@@ -165,13 +236,12 @@ class Factura extends React.Component {
               <Select
               style={styles.button}
               
-                options={["Seleccione",
-                  "Contado",
-                  "Crédito",
-                  "Consignación",
-                  "Apartado",
-                  "Arrendamiento con opción de compra",
-                  "Arrendamiento en función financiera"
+                options={["Contado",
+                          "Crédito",
+                          "Consignación",
+                          "Apartado",
+                          "Arrendamiento con opción de compra  ",
+                          "Arrendamiento en función financiera"
                 ]}
               />
             </Block>
@@ -198,11 +268,10 @@ class Factura extends React.Component {
             <Block center>
               <Select
                 style={styles.button}
-                options={["Seleccione",
-                  "Efectivo",
+                options={["Efectivo",
                   "Tarjeta",
                   "Cheque",
-                  "Transferencia - depósito bancario",
+                  "Transferencia - depósito bancario  ",
                   "Recaudado por terceros",
                   "Otros"
                 ]}
