@@ -5,7 +5,7 @@ import {Alert, Modal, Pressable,View,ScrollView, StyleSheet, Dimensions, Touchab
 // Galio components
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
 // Argon themed components
-import { argonTheme, tabs } from "../constants/";
+import { argonTheme, tabs, tabs2 } from "../constants/";
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
 
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -301,9 +301,12 @@ class Factura extends React.Component {
           
         <Block>
         <Block style={{ marginBottom: theme.SIZES.BASE }}>
-            <Header tabs={tabs.categories}   title="Líneas de Factura" />
+            <Header tabs={tabs.categories}   title="Cama Matrimonial" />
           </Block>
         </Block>
+        <Block style={{ marginBottom: theme.SIZES.BASE }}>
+            <Header tabs={tabs2.categories}   title="Celular Huawei" />
+          </Block>
           <Text
             p
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
