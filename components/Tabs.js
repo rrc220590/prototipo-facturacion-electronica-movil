@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Dimensions, FlatList, Animated } from 'react-native';
+import { StyleSheet, Dimensions, FlatList, Animated,Text } from 'react-native';
 import { Block, theme } from 'galio-framework';
 
 const { width } = Dimensions.get('screen');
 import argonTheme from '../constants/Theme';
+import { block } from 'react-native-reanimated';
 
 const defaultMenu = [
   { id: 'popular', title: 'Popular', },
@@ -84,9 +85,9 @@ export default class Tabs extends React.Component {
             { color: textColor }
           ]}
           onPress={() => this.selectMenu(item.id)}>
-          {item.title}
+          {item.title }
         </Animated.Text>
-      </Block>
+        </Block>
     )
   }
 
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: argonTheme.COLORS.ACTIVE,
     borderRadius: 4,
-    marginRight: 9
+    marginRight: 25,
   },
   containerShadow: {
     shadowColor: 'black',
@@ -155,6 +156,8 @@ const styles = StyleSheet.create({
     // lineHeight: 28,
     paddingVertical: 10,
     paddingHorizontal: 16,
-    color: argonTheme.COLORS.MUTED
+    color: argonTheme.COLORS.MUTED,
+    flexDirection:'column',
+    alignSelf: 'flex-start'
   },
 });

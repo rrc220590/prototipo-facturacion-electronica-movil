@@ -25,7 +25,12 @@ class Factura extends React.Component {
       showFechaVencimiento: false,
       fechaFactura: '',
       fechaVencimiento: '',
-      modalVisible:false
+      modalVisible:false,
+      categories: [
+        { id: '1', title: 'Unidad:1 - Descripcion:Bicicleta - Precio:500000 - Moneda:CRC - Descuento:10% - Impuesto:13%' },
+        { id: '2', title: 'Unidad:1 - Descripcion:Bicicleta - Precio:500000 - Moneda:CRC - Descuento:10% - Impuesto:13%' },
+      
+      ],
     };
   }
 
@@ -347,7 +352,7 @@ class Factura extends React.Component {
               onPress={() => this.setModalVisible(!this.state.modalVisible)}
             >
                  
-              <Text style={styles.textStyle}>Agregar</Text>
+              <Text style={styles.textStyle}>Agregar Artículo</Text>
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
@@ -363,19 +368,14 @@ class Factura extends React.Component {
       </Modal>
             </Block>
             
-        <Text bold size={16} style={styles.title}>
-          -----------------------------------
-        </Text>
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
           
         <Block>
         <Block style={{ marginBottom: theme.SIZES.BASE }}>
-            <Header tabs={tabs.categories}   title="Cama Matrimonial" />
+            <Header tabs={this.state.categories}   title="Artículos" />
           </Block>
         </Block>
-        <Block style={{ marginBottom: theme.SIZES.BASE }}>
-            <Header tabs={tabs.categories}   title="Celular Huawei" />
-          </Block>
+     
           <Text
             p
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
