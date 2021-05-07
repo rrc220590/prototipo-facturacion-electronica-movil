@@ -26,11 +26,27 @@ class Factura extends React.Component {
       fechaFactura: '',
       fechaVencimiento: '',
       modalVisible:false,
-      categories: [
-        { id: '1', title: 'Unidad:1 - Descripcion:Bicicleta - Precio:500000 - Moneda:CRC - Descuento:10% - Impuesto:13%' },
-        { id: '2', title: 'Unidad:1 - Descripcion:Bicicleta - Precio:500000 - Moneda:CRC - Descuento:10% - Impuesto:13%' },
-      
-      ],
+      categories: [ 
+        { linea1: [
+          { id: 'id', title: '1' },
+          { id: 'Descripcion', title: 'Bicicleta Scott' },
+          { id: 'Cantidad', title: 'Cantidad: 1' },
+          { id: 'Precio', title: 'Precio: ¢500000' },
+          { id: 'Descuento', title: 'Descuento: ¢50000' },
+          { id: 'Impuesto', title: 'Impuesto: ¢58500' },
+          { id: 'Total', title: 'Total: ¢508500' },
+         ],
+         linea2: [
+          { id: 'id', title: '1' },
+          { id: 'Descripcion', title: 'Bicicleta Trek' },
+          { id: 'Cantidad', title: 'Cantidad: 2' },
+          { id: 'Precio', title: 'Precio: ¢150000' },
+          { id: 'Descuento', title: 'Descuento: ¢0' },
+          { id: 'Impuesto', title: 'Impuesto: ¢19500' },
+          { id: 'Total', title: 'Total: ¢339000' },
+         ], 
+        },
+       ],
     };
   }
 
@@ -367,12 +383,27 @@ class Factura extends React.Component {
         </View>
       </Modal>
             </Block>
+
+        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+          <Text
+            h5
+            style={{ marginBottom: theme.SIZES.BASE / 2 }}
+            color={argonTheme.COLORS.DEFAULT}
+          >
+            Artículos
+          </Text>
+
+
+        </Block>
             
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
           
         <Block>
         <Block style={{ marginBottom: theme.SIZES.BASE }}>
-            <Header tabs={this.state.categories}   title="Artículos" />
+            <Header tabs={this.state.categories[0].linea1}   title={this.state.categories[0].linea1[1].title} />
+          </Block>
+          <Block style={{ marginBottom: theme.SIZES.BASE }}>
+            <Header tabs={this.state.categories[0].linea2}   title={this.state.categories[0].linea2[1].title} />
           </Block>
         </Block>
      
