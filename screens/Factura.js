@@ -26,8 +26,8 @@ class Factura extends React.Component {
       fechaFactura: '',
       fechaVencimiento: '',
       modalVisible:false,
-      categories: [ 
-        { linea1: [
+      categories: { 
+         linea1: [
           { id: 'id', title: '1' },
           { id: 'Descripcion', title: 'Bicicleta Scott' },
           { id: 'Cantidad', title: 'Cantidad: 1' },
@@ -44,9 +44,8 @@ class Factura extends React.Component {
           { id: 'Descuento', title: 'Descuento: ¢0' },
           { id: 'Impuesto', title: 'Impuesto: ¢19500' },
           { id: 'Total', title: 'Total: ¢339000' },
-         ], 
-        },
-       ],
+        ], 
+      },
     };
   }
 
@@ -400,10 +399,10 @@ class Factura extends React.Component {
           
         <Block>
         <Block style={{ marginBottom: theme.SIZES.BASE }}>
-            <Header tabs={this.state.categories[0].linea1}   title={this.state.categories[0].linea1[1].title} />
+            <Header tabs={this.state.categories.linea1}   title={this.state.categories.linea1[1].title} />
           </Block>
           <Block style={{ marginBottom: theme.SIZES.BASE }}>
-            <Header tabs={this.state.categories[0].linea2}   title={this.state.categories[0].linea2[1].title} />
+            <Header tabs={this.state.categories.linea2}   title={this.state.categories.linea2[1].title} />
           </Block>
         </Block>
      
