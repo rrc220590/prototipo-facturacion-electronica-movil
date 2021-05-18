@@ -37,7 +37,7 @@ class Factura extends React.Component {
           { id: 'Total', title: 'Total: ¢508500' },
          ],
          linea2: [
-          { id: 'id', title: '1' },
+          { id: 'id', title: '2' },
           { id: 'Descripcion', title: 'Bicicleta Trek' },
           { id: 'Cantidad', title: 'Cantidad: 2' },
           { id: 'Precio', title: 'Precio: ¢150000' },
@@ -47,6 +47,18 @@ class Factura extends React.Component {
         ], 
       },
     };
+  }
+
+  anadirItem() {
+      this.state.categories['linea' + (Object.keys(this.state.categories).length + 1)] = [
+        { id: 'id', title: (Object.keys(this.state.categories).length + 1) },
+        { id: 'Descripcion', title: 'Bicicleta Nueva' },
+        { id: 'Cantidad', title: 'Cantidad: 1' },
+        { id: 'Precio', title: 'Precio: 150000' },
+        { id: 'Descuento', title: 'Descuento: ¢50000' },
+        { id: 'Impuesto', title: 'Impuesto: ¢13000' },
+        { id: 'Total', title: 'Total: ¢113000' },
+      ];
   }
 
   showPickerFechaFactura = () => {
@@ -310,7 +322,7 @@ class Factura extends React.Component {
       
       <Block flex style={styles.group}>
            <Block center>
-              <Button color="default" style={styles.button}  onPress={() => this.setModalVisible(!this.state.modalVisible)}>
+              <Button color="default" style={styles.button}  onPress={() => { this.setModalVisible(!this.state.modalVisible); this.anadirItem();}}>
                 Agregar Línea
               </Button>
               <Modal
@@ -398,12 +410,13 @@ class Factura extends React.Component {
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
           
         <Block>
-        <Block style={{ marginBottom: theme.SIZES.BASE }}>
-            <Header tabs={this.state.categories.linea1}   title={this.state.categories.linea1[1].title} />
-          </Block>
-          <Block style={{ marginBottom: theme.SIZES.BASE }}>
-            <Header tabs={this.state.categories.linea2}   title={this.state.categories.linea2[1].title} />
-          </Block>
+          {
+            Object.keys(this.state.categories).map(item => (
+              <Block style={{ marginBottom: theme.SIZES.BASE }}>
+                <Header tabs={this.state.categories[item]} title={this.state.categories[item][1].title} />
+              </Block>
+            ))
+          }
         </Block>
      
           <Text
