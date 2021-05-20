@@ -19,6 +19,7 @@ class Factura extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      cantidad: 0,
       date: new Date(),
       mode: 'date', //Se puede utilizar time tambien
       showFechaFactura: false,
@@ -53,12 +54,13 @@ class Factura extends React.Component {
       this.state.categories['linea' + (Object.keys(this.state.categories).length + 1)] = [
         { id: 'id', title: (Object.keys(this.state.categories).length + 1) },
         { id: 'Descripcion', title: 'Bicicleta Nueva' },
-        { id: 'Cantidad', title: 'Cantidad: 1' },
+        { id: 'Cantidad', title: 'Cantidad: ' + this.state.cantidad},
         { id: 'Precio', title: 'Precio: 150000' },
         { id: 'Descuento', title: 'Descuento: ¢50000' },
         { id: 'Impuesto', title: 'Impuesto: ¢13000' },
         { id: 'Total', title: 'Total: ¢113000' },
       ];
+      this.setState({ cantidad: 0 });
   }
 
   showPickerFechaFactura = () => {
@@ -91,6 +93,10 @@ class Factura extends React.Component {
     this.setState({
       modalVisible: visible
     })
+  }
+
+  onTextChanged(value) {
+    this.setState({ cantidad: value });
   }
   
   state = {
@@ -322,7 +328,7 @@ class Factura extends React.Component {
       
       <Block flex style={styles.group}>
            <Block center>
-              <Button color="default" style={styles.button}  onPress={() => { this.setModalVisible(!this.state.modalVisible); this.anadirItem();}}>
+              <Button color="default" style={styles.button}  onPress={() => this.setModalVisible(!this.state.modalVisible)}>
                 Agregar Línea
               </Button>
               <Modal
@@ -339,7 +345,7 @@ class Factura extends React.Component {
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Nueva Línea!</Text>
               
-          <Input right placeholder="Cantidad" iconContent={<Block />} />
+          <Input right placeholder="Cantidad" onChangeText={(value)=> this.onTextChanged(value)} value={this.state.cantidad} iconContent={<Block />} />
 
 
         <ModalDropdown defaultValue="Seleccione una unidad de medida" options={['Unidad', 'Metro','Kilogramo','Libro','Servicios Profesionales']}/>
@@ -376,7 +382,7 @@ class Factura extends React.Component {
       
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => this.setModalVisible(!this.state.modalVisible)}
+              onPress={() => { this.setModalVisible(!this.state.modalVisible); this.anadirItem();}}
             >
                  
               <Text style={styles.textStyle}>Agregar Artículo</Text>
