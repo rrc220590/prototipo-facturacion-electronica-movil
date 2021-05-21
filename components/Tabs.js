@@ -119,7 +119,7 @@ export default class Tabs extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({j7nhjnhnh hj7j7
+const styles = StyleSheet.create({
   container: {
     width: width,
     backgroundColor: theme.COLORS.WHITE,
