@@ -27,31 +27,13 @@ class Factura extends React.Component {
       fechaFactura: '',
       fechaVencimiento: '',
       modalVisible:false,
-      categories: { 
-         linea1: [
-          { id: 'id', title: '1' },
-          { id: 'Descripcion', title: 'Bicicleta Scott' },
-          { id: 'Cantidad', title: 'Cantidad: 1' },
-          { id: 'Precio', title: 'Precio: ¢500000' },
-          { id: 'Descuento', title: 'Descuento: ¢50000' },
-          { id: 'Impuesto', title: 'Impuesto: ¢58500' },
-          { id: 'Total', title: 'Total: ¢508500' },
-         ],
-         linea2: [
-          { id: 'id', title: '2' },
-          { id: 'Descripcion', title: 'Bicicleta Trek' },
-          { id: 'Cantidad', title: 'Cantidad: 2' },
-          { id: 'Precio', title: 'Precio: ¢150000' },
-          { id: 'Descuento', title: 'Descuento: ¢0' },
-          { id: 'Impuesto', title: 'Impuesto: ¢19500' },
-          { id: 'Total', title: 'Total: ¢339000' },
-        ], 
-      },
+      categories: {},
     };
   }
 
   anadirItem() {
-      this.state.categories['linea' + (Object.keys(this.state.categories).length + 1)] = [
+      key = 'linea' + (Object.keys(this.state.categories).length + 1);
+      this.state.categories[key] = [
         { id: 'id', title: (Object.keys(this.state.categories).length + 1) },
         { id: 'Descripcion', title: 'Bicicleta Nueva' },
         { id: 'Cantidad', title: 'Cantidad: ' + this.state.cantidad},
@@ -96,7 +78,10 @@ class Factura extends React.Component {
   }
 
   onTextChanged(value) {
-    this.setState({ cantidad: value });
+    const numericRegex = /^([0-9]{1,100})+$/
+    if(numericRegex.test(value)) {
+      this.setState({ cantidad: value });
+    }  
   }
   
   state = {
@@ -344,42 +329,35 @@ class Factura extends React.Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Nueva Línea!</Text>
-              
-          <Input right placeholder="Cantidad" onChangeText={(value)=> this.onTextChanged(value)} value={this.state.cantidad} iconContent={<Block />} />
-
-
-        <ModalDropdown defaultValue="Seleccione una unidad de medida" options={['Unidad', 'Metro','Kilogramo','Libro','Servicios Profesionales']}/>
-
+          <Input right placeholder="Número de Línea" editable={false} style={styles.disabled} iconContent={<Block />} />    
+          <Input right placeholder="Cantidad" keyboardType="numeric" onChangeText={(value)=> this.onTextChanged(value)} iconContent={<Block />} />
+        <ModalDropdown textStyle={styles.dropdown_text} dropdownTextStyle={styles.dropdown_dropdownTextStyle}
+                       dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
+                       defaultValue="Unidad de medida..." 
+                       options={['Unidad', 'Metro','Kilogramo','Libro','Servicios Profesionales']}/>
         <Input right placeholder="Descripción" iconContent={<Block />} />
-        <Input right placeholder="Precio Unitario" iconContent={<Block />} />
-
-        <ModalDropdown defaultValue="Impuesto" options={["Impuesto General sobre las ventas",
-                  "Impuesto Selectivo de Consumo",
-                  "Impuesto único a los combustibles",
-                  "Impuesto específico a bebidas alcohólicas",
-                  "Impuesto a los productos de tabaco",
-                  "Arredamiento en función financiera"]}/>
-
-      
-        <Input right placeholder="Porcentaje de Descuento" iconContent={<Block />} />
-
-        <ModalDropdown defaultValue="Moneda" options={[
-             "CRC",
-             "USD"
-        ]}/>
-        <Input right placeholder="Porcentaje de Descuento" iconContent={<Block />} />
-        <ModalDropdown defaultValue="Impuesto" options={[
-             "Impuesto General de Ventas",
-             "Impuesto Selectivo de Consumo",
-             "Impuesto Único a los combustibles",
-             "Impuesto Específico a bebidas alcohólicas",
-             "Impuesto a los productos del tabaco",
-             "Arrendamiento de función financiera",
-             "Impuesto Específico sobre las bebidas envasadas sin contenido alcohólico y jabones de tocador",
-        ]}/>
-        <Input right placeholder="Porcentaje de Impuesto" iconContent={<Block />} />
-        <Input right placeholder="Total" iconContent={<Block />} />
-      
+        <Input right placeholder="Precio Unitario" keyboardType="numeric" iconContent={<Block />} />
+        <ModalDropdown textStyle={styles.dropdown_text} dropdownTextStyle={styles.dropdown_dropdownTextStyle}
+                       dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
+                       defaultValue="Moneda"
+                       options={[
+                        "CRC",
+                        "USD"
+                       ]}/>
+        <Input right placeholder="Porcentaje de Descuento" keyboardType="numeric" iconContent={<Block />} />
+        <ModalDropdown textStyle={styles.dropdown_text} dropdownTextStyle={styles.dropdown_dropdownTextStyle}
+                       dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
+                       defaultValue="Impuesto" options={[
+                        "Impuesto General de Ventas",
+                        "Impuesto Selectivo de Consumo",
+                        "Impuesto Único a los combustibles",
+                        "Impuesto Específico a bebidas alcohólicas",
+                        "Impuesto a los productos del tabaco",
+                        "Arrendamiento de función financiera",
+                        "Impuesto Específico sobre las bebidas envasadas sin contenido alcohólico y jabones de tocador",
+                       ]}/>        
+        <Input right placeholder="Porcentaje de Impuesto" keyboardType="numeric" iconContent={<Block />} />
+        <Input right placeholder="Total" editable={false} iconContent={<Block />} />
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => { this.setModalVisible(!this.state.modalVisible); this.anadirItem();}}
@@ -676,6 +654,31 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2
+  },
+  disabled: {
+    color: argonTheme.COLORS.WARNING,
+  },
+  dropdown: {
+    width: width - theme.SIZES.BASE * 7,
+    margin: 8,
+    borderColor: 'lightgray',
+    borderWidth: 1,
+    borderRadius: 3,  
+  },
+  dropdown_dropdownTextStyle: {
+    color: argonTheme.COLORS.PLACEHOLDER,
+    fontSize: 14
+  },
+  dropdown_dropdown: {
+    width: width - theme.SIZES.BASE * 7,
+  },
+  dropdown_text: {
+    marginVertical: 10,
+    marginHorizontal: 16,
+    fontSize: 14,
+    color: argonTheme.COLORS.PLACEHOLDER,
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
   optionsButton: {
     width: "auto",
