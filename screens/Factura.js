@@ -277,6 +277,35 @@ class Factura extends React.Component {
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
             color={argonTheme.COLORS.DEFAULT}
           >
+            Moneda
+          </Text>
+
+
+        </Block>
+
+        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+
+
+<Block >
+
+  <Block center>
+    <Select
+    style={styles.button}
+    
+      options={["CRC",
+                "USD"
+      ]}
+    />
+  </Block>
+</Block>
+</Block>
+
+        <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+          <Text
+            h5
+            style={{ marginBottom: theme.SIZES.BASE / 2 }}
+            color={argonTheme.COLORS.DEFAULT}
+          >
             Medio de Pago
           </Text>
 
@@ -337,13 +366,7 @@ class Factura extends React.Component {
                        options={['Unidad', 'Metro','Kilogramo','Libro','Servicios Profesionales']}/>
         <Input right placeholder="Descripción" iconContent={<Block />} />
         <Input right placeholder="Precio Unitario" keyboardType="numeric" iconContent={<Block />} />
-        <ModalDropdown textStyle={styles.dropdown_text} dropdownTextStyle={styles.dropdown_dropdownTextStyle}
-                       dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
-                       defaultValue="Moneda"
-                       options={[
-                        "CRC",
-                        "USD"
-                       ]}/>
+   
         <Input right placeholder="Porcentaje de Descuento" keyboardType="numeric" iconContent={<Block />} />
         <ModalDropdown textStyle={styles.dropdown_text} dropdownTextStyle={styles.dropdown_dropdownTextStyle}
                        dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
