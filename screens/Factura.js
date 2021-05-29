@@ -42,11 +42,11 @@ class Factura extends React.Component {
       key = 'linea' + (Object.keys(this.state.categories).length + 1);
       this.state.categories[key] = [
         { id: 'id', title: (Object.keys(this.state.categories).length + 1) },
-        { id: 'Descripcion', title: 'Bicicleta Nueva' },
+        { id: 'Descripcion', title: this.state.descripcion },
         { id: 'Cantidad', title: 'Cantidad: ' + this.state.cantidad},
         { id: 'Precio', title: 'Precio: ' + this.state.precioUnitario},
         { id: 'Descuento', title: 'Descuento: ¢0' },
-        { id: 'Impuesto', title: 'Impuesto: ' + this.state.impuesto},
+        { id: 'Impuesto', title: 'Impuesto: ' + this.state.porcentajeImpuesto},
         { id: 'Total', title: 'Total: ¢00000' },
       ];
       this.setState({ cantidad: 0, precioUnitario: 0, impuesto: '' });
@@ -91,8 +91,8 @@ class Factura extends React.Component {
     }  
   }
 
-  onTextUnidadMedida(value) {
-    this.setState({ unidadMedida: value });
+  onTextUnidadMedida(value, index) {
+    this.setState({ unidadMedida: index });
   }
   
   onTextDescripcion(value) {
@@ -106,8 +106,8 @@ class Factura extends React.Component {
     }
   }
 
-  onTextMoneda(value) {
-    this.setState({ moneda: value });
+  onTextMoneda(value, index) {
+    this.setState({ moneda: index });
   }
 
   onTextPorcentajeDescuento(value) {
@@ -117,8 +117,8 @@ class Factura extends React.Component {
     }
   }
 
-  onTextImpuesto(value) {
-    this.setState({ impuesto: value });
+  onTextImpuesto(value, index) {
+    this.setState({ impuesto: index });
   }
 
   onTextPorcentajeImpuesto(value) {
@@ -375,14 +375,14 @@ class Factura extends React.Component {
             <Text style={styles.modalText}>Nueva Línea!</Text>
           <Input right placeholder="Número de Línea" editable={false} style={styles.disabled} iconContent={<Block />} />    
           <Input right placeholder="Cantidad" keyboardType="numeric" onChangeText={(value)=> this.onTextCantidad(value)} iconContent={<Block />} />
-        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(value)=> this.onTextUnidadMedida(value)}
+        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(value, index)=> this.onTextUnidadMedida(value, index)}
                        dropdownTextStyle={styles.dropdown_dropdownTextStyle}
                        dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
                        defaultValue="Unidad de medida..." 
                        options={['Unidad', 'Metro','Kilogramo','Libro','Servicios Profesionales']}/>
         <Input right placeholder="Descripción" onChangeText={(value)=> this.onTextDescripcion(value)} iconContent={<Block />} />
         <Input right placeholder="Precio Unitario" keyboardType="numeric" onChangeText={(value)=> this.onTextPrecioUnitario(value)} iconContent={<Block />} />
-        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(value)=> this.onTextMoneda(value)}
+        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(value, index)=> this.onTextMoneda(value, index)}
                        dropdownTextStyle={styles.dropdown_dropdownTextStyle}
                        dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
                        defaultValue="Moneda"
@@ -391,7 +391,7 @@ class Factura extends React.Component {
                         "USD"
                        ]}/>
         <Input right placeholder="Porcentaje de Descuento" keyboardType="numeric" onChangeText={(value)=> this.onTextPorcentajeDescuento(value)} iconContent={<Block />} />
-        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(value)=> this.onTextImpuesto(value)}
+        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(value, index)=> this.onTextImpuesto(value, index)}
                        dropdownTextStyle={styles.dropdown_dropdownTextStyle}
                        dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
                        defaultValue="Impuesto" options={[
