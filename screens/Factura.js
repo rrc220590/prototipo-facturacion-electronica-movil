@@ -20,6 +20,13 @@ class Factura extends React.Component {
     super(props);
     this.state = {
       cantidad: 0,
+      unidadMedida: '',
+      descripcion: '',
+      precioUnitario: 0,
+      moneda: '',
+      porcentajeDescuento: 0,
+      impuesto: '',
+      porcentajeImpuesto: 0,
       date: new Date(),
       mode: 'date', //Se puede utilizar time tambien
       showFechaFactura: false,
@@ -35,14 +42,14 @@ class Factura extends React.Component {
       key = 'linea' + (Object.keys(this.state.categories).length + 1);
       this.state.categories[key] = [
         { id: 'id', title: (Object.keys(this.state.categories).length + 1) },
-        { id: 'Descripcion', title: 'Bicicleta Nueva' },
+        { id: 'Descripcion', title: this.state.descripcion },
         { id: 'Cantidad', title: 'Cantidad: ' + this.state.cantidad},
-        { id: 'Precio', title: 'Precio: 150000' },
-        { id: 'Descuento', title: 'Descuento: ¢50000' },
-        { id: 'Impuesto', title: 'Impuesto: ¢13000' },
-        { id: 'Total', title: 'Total: ¢113000' },
+        { id: 'Precio', title: 'Precio: ' + this.state.precioUnitario},
+        { id: 'Descuento', title: 'Descuento: ¢0' },
+        { id: 'Impuesto', title: 'Impuesto: ' + this.state.porcentajeImpuesto},
+        { id: 'Total', title: 'Total: ¢00000' },
       ];
-      this.setState({ cantidad: 0 });
+      this.setState({ cantidad: 0, precioUnitario: 0, impuesto: '' });
   }
 
   showPickerFechaFactura = () => {
@@ -77,13 +84,50 @@ class Factura extends React.Component {
     })
   }
 
-  onTextChanged(value) {
+  onTextCantidad(value) {
     const numericRegex = /^([0-9]{1,100})+$/
     if(numericRegex.test(value)) {
       this.setState({ cantidad: value });
     }  
   }
+
+  onTextUnidadMedida(index, value) {
+    this.setState({ unidadMedida: index });
+  }
   
+  onTextDescripcion(value) {
+    this.setState({ descripcion: value });
+  }
+
+  onTextPrecioUnitario(value) {
+    const numericRegex = /^([0-9]{1,100})+$/
+    if(numericRegex.test(value)) {
+      this.setState({ precioUnitario: value });
+    }
+  }
+
+  onTextMoneda(index, value) {
+    this.setState({ moneda: index });
+  }
+
+  onTextPorcentajeDescuento(value) {
+    const numericRegex = /^([0-9]{1,100})+$/
+    if(numericRegex.test(value)) {
+      this.setState({ porcentajeDescuento: value });
+    }
+  }
+
+  onTextImpuesto(index, value) {
+    this.setState({ impuesto: index });
+  }
+
+  onTextPorcentajeImpuesto(value) {
+    const numericRegex = /^([0-9]{1,100})+$/
+    if(numericRegex.test(value)) {
+      this.setState({ porcentajeImpuesto: value });
+    }
+  }
+
   state = {
     "switch-1": true,
     "switch-2": false
@@ -277,7 +321,7 @@ class Factura extends React.Component {
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
             color={argonTheme.COLORS.DEFAULT}
           >
-            Moneda
+           Moneda
           </Text>
 
 
@@ -359,16 +403,17 @@ class Factura extends React.Component {
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Nueva Línea!</Text>
           <Input right placeholder="Número de Línea" editable={false} style={styles.disabled} iconContent={<Block />} />    
-          <Input right placeholder="Cantidad" keyboardType="numeric" onChangeText={(value)=> this.onTextChanged(value)} iconContent={<Block />} />
-        <ModalDropdown textStyle={styles.dropdown_text} dropdownTextStyle={styles.dropdown_dropdownTextStyle}
+          <Input right placeholder="Cantidad" keyboardType="numeric" onChangeText={(value)=> this.onTextCantidad(value)} iconContent={<Block />} />
+        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onTextUnidadMedida(index, value)}
+                       dropdownTextStyle={styles.dropdown_dropdownTextStyle}
                        dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
                        defaultValue="Unidad de medida..." 
                        options={['Unidad', 'Metro','Kilogramo','Libro','Servicios Profesionales']}/>
-        <Input right placeholder="Descripción" iconContent={<Block />} />
-        <Input right placeholder="Precio Unitario" keyboardType="numeric" iconContent={<Block />} />
-   
-        <Input right placeholder="Porcentaje de Descuento" keyboardType="numeric" iconContent={<Block />} />
-        <ModalDropdown textStyle={styles.dropdown_text} dropdownTextStyle={styles.dropdown_dropdownTextStyle}
+        <Input right placeholder="Descripción" onChangeText={(value)=> this.onTextDescripcion(value)} iconContent={<Block />} />
+        <Input right placeholder="Precio Unitario" keyboardType="numeric" onChangeText={(value)=> this.onTextPrecioUnitario(value)} iconContent={<Block />} />
+        <Input right placeholder="Porcentaje de Descuento" keyboardType="numeric" onChangeText={(value)=> this.onTextPorcentajeDescuento(value)} iconContent={<Block />} />
+        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onTextImpuesto(index, value)}
+                       dropdownTextStyle={styles.dropdown_dropdownTextStyle}
                        dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
                        defaultValue="Impuesto" options={[
                         "Impuesto General de Ventas",
@@ -379,7 +424,7 @@ class Factura extends React.Component {
                         "Arrendamiento de función financiera",
                         "Impuesto Específico sobre las bebidas envasadas sin contenido alcohólico y jabones de tocador",
                        ]}/>        
-        <Input right placeholder="Porcentaje de Impuesto" keyboardType="numeric" iconContent={<Block />} />
+        <Input right placeholder="Porcentaje de Impuesto" keyboardType="numeric" onChangeText={(value)=> this.onTextPorcentajeImpuesto(value)} iconContent={<Block />} />
         <Input right placeholder="Total" editable={false} iconContent={<Block />} />
             <Pressable
               style={[styles.button, styles.buttonClose]}
