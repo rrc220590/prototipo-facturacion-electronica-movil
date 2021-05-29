@@ -91,7 +91,7 @@ class Factura extends React.Component {
     }  
   }
 
-  onTextUnidadMedida(value, index) {
+  onTextUnidadMedida(index, value) {
     this.setState({ unidadMedida: index });
   }
   
@@ -106,7 +106,7 @@ class Factura extends React.Component {
     }
   }
 
-  onTextMoneda(value, index) {
+  onTextMoneda(index, value) {
     this.setState({ moneda: index });
   }
 
@@ -117,7 +117,7 @@ class Factura extends React.Component {
     }
   }
 
-  onTextImpuesto(value, index) {
+  onTextImpuesto(index, value) {
     this.setState({ impuesto: index });
   }
 
@@ -375,14 +375,14 @@ class Factura extends React.Component {
             <Text style={styles.modalText}>Nueva Línea!</Text>
           <Input right placeholder="Número de Línea" editable={false} style={styles.disabled} iconContent={<Block />} />    
           <Input right placeholder="Cantidad" keyboardType="numeric" onChangeText={(value)=> this.onTextCantidad(value)} iconContent={<Block />} />
-        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(value, index)=> this.onTextUnidadMedida(value, index)}
+        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onTextUnidadMedida(index, value)}
                        dropdownTextStyle={styles.dropdown_dropdownTextStyle}
                        dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
                        defaultValue="Unidad de medida..." 
                        options={['Unidad', 'Metro','Kilogramo','Libro','Servicios Profesionales']}/>
         <Input right placeholder="Descripción" onChangeText={(value)=> this.onTextDescripcion(value)} iconContent={<Block />} />
         <Input right placeholder="Precio Unitario" keyboardType="numeric" onChangeText={(value)=> this.onTextPrecioUnitario(value)} iconContent={<Block />} />
-        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(value, index)=> this.onTextMoneda(value, index)}
+        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onTextMoneda(index, value)}
                        dropdownTextStyle={styles.dropdown_dropdownTextStyle}
                        dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
                        defaultValue="Moneda"
@@ -391,7 +391,7 @@ class Factura extends React.Component {
                         "USD"
                        ]}/>
         <Input right placeholder="Porcentaje de Descuento" keyboardType="numeric" onChangeText={(value)=> this.onTextPorcentajeDescuento(value)} iconContent={<Block />} />
-        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(value, index)=> this.onTextImpuesto(value, index)}
+        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onTextImpuesto(index, value)}
                        dropdownTextStyle={styles.dropdown_dropdownTextStyle}
                        dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
                        defaultValue="Impuesto" options={[
