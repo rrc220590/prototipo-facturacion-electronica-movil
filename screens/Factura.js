@@ -23,10 +23,10 @@ class Factura extends React.Component {
       unidadMedida: '',
       descripcion: '',
       precioUnitario: 0,
-      moneda: '',
       porcentajeDescuento: 0,
       impuesto: '',
       porcentajeImpuesto: 0,
+      total: 0,
       date: new Date(),
       mode: 'date', //Se puede utilizar time tambien
       showFechaFactura: false,
@@ -39,17 +39,25 @@ class Factura extends React.Component {
   }
 
   anadirItem() {
-      key = 'linea' + (Object.keys(this.state.categories).length + 1);
+      var numeroLinea = Object.keys(this.state.categories).length + 1;
+      var key = 'linea' + numeroLinea;
       this.state.categories[key] = [
-        { id: 'id', title: (Object.keys(this.state.categories).length + 1) },
+        { id: 'id', title: numeroLinea },
         { id: 'Descripcion', title: this.state.descripcion },
         { id: 'Cantidad', title: 'Cantidad: ' + this.state.cantidad},
         { id: 'Precio', title: 'Precio: ' + this.state.precioUnitario},
-        { id: 'Descuento', title: 'Descuento: ¢0' },
-        { id: 'Impuesto', title: 'Impuesto: ' + this.state.porcentajeImpuesto},
-        { id: 'Total', title: 'Total: ¢00000' },
+        { id: 'Descuento', title: 'Descuento: ' + this.state.porcentajeDescuento + '%'},
+        { id: 'Impuesto', title: 'Impuesto: ' + this.state.porcentajeImpuesto + '%'},
+        { id: 'Total', title: 'Total: ' + this.state.total},
       ];
-      this.setState({ cantidad: 0, precioUnitario: 0, impuesto: '' });
+      this.setState({ 
+                      cantidad: 0,
+                      precioUnitario: 0,
+                      porcentajeDescuento: 0,
+                      porcentajeImpuesto: 0,
+                      impuesto: '',
+                      total: 0 
+                    });
   }
 
   showPickerFechaFactura = () => {
@@ -84,18 +92,21 @@ class Factura extends React.Component {
     })
   }
 
-  onTextCantidad(value) {
+  onChangeCantidad(value) {
     const numericRegex = /^([0-9]{1,100})+$/
     if(numericRegex.test(value)) {
       this.setState({ cantidad: value });
+      var nuevoPrecio = ((100 - this.state.porcentajeDescuento) / 100) * this.state.precioUnitario;
+      var nuevoTotal = nuevoPrecio * value * (this.state.porcentajeImpuesto / 100 + 1);
+      this.setState({ total: nuevoTotal.toFixed(2)}); //PENDIENTE DE CORREGIR ERROR CON DECIMALES, se utiliza toFixed(2) como workaround
     }  
   }
 
-  onTextUnidadMedida(index, value) {
+  onChangeUnidadMedida(index, value) {
     this.setState({ unidadMedida: index });
   }
   
-  onTextDescripcion(value) {
+  onChangeDescripcion(value) {
     this.setState({ descripcion: value });
   }
 
@@ -103,28 +114,66 @@ class Factura extends React.Component {
     const numericRegex = /^([0-9]{1,100})+$/
     if(numericRegex.test(value)) {
       this.setState({ precioUnitario: value });
+      var nuevoPrecio = ((100 - this.state.porcentajeDescuento) / 100) * value;
+      var nuevoTotal = nuevoPrecio * this.state.cantidad * (this.state.porcentajeImpuesto / 100 + 1);
+      this.setState({ total: nuevoTotal.toFixed(2)}); //PENDIENTE DE CORREGIR ERROR CON DECIMALES, se utiliza toFixed(2) como workaround
     }
   }
 
-  onTextMoneda(index, value) {
-    this.setState({ moneda: index });
-  }
-
-  onTextPorcentajeDescuento(value) {
+  onChangePorcentajeDescuento(value) {
     const numericRegex = /^([0-9]{1,100})+$/
     if(numericRegex.test(value)) {
       this.setState({ porcentajeDescuento: value });
+      var nuevoPrecio = ((100 - value) / 100) * this.state.precioUnitario;
+      var nuevoTotal = nuevoPrecio * this.state.cantidad * (this.state.porcentajeImpuesto / 100 + 1);
+      this.setState({ total: nuevoTotal.toFixed(2)}); //PENDIENTE DE CORREGIR ERROR CON DECIMALES, se utiliza toFixed(2) como workaround
     }
   }
 
-  onTextImpuesto(index, value) {
+  onChangeImpuesto(index, value) {
+    var porcentaje = '';
     this.setState({ impuesto: index });
+    switch(index) {
+        case 0:
+          porcentaje = 13;
+          break;
+        case 1:
+          porcentaje = 2;
+          break;
+        case 2:
+          porcentaje = 65;
+          break;
+        case 3:
+          porcentaje = 10;
+          break;
+        case 4:
+          porcentaje = 95;
+          break;
+        case 5:
+          porcentaje = 10;
+          break;
+        case 6:
+          porcentaje = 4;
+          break;
+        default:
+          porcentaje = '';
+          break;
+      }
+      this.setState({ porcentajeImpuesto: porcentaje });
+      var nuevoPrecio = ((100 - this.state.porcentajeDescuento) / 100) * this.state.precioUnitario;
+      var nuevoTotal = nuevoPrecio * this.state.cantidad * (porcentaje / 100 + 1);
+      this.setState({ total: nuevoTotal.toFixed(2)}); //PENDIENTE DE CORREGIR ERROR CON DECIMALES, se utiliza toFixed(2) como workaround
   }
 
-  onTextPorcentajeImpuesto(value) {
+  onChangePorcentajeImpuesto(value) {
     const numericRegex = /^([0-9]{1,100})+$/
     if(numericRegex.test(value)) {
       this.setState({ porcentajeImpuesto: value });
+      var nuevoPrecio = ((100 - this.state.porcentajeDescuento) / 100) * this.state.precioUnitario;
+      var nuevoTotal = nuevoPrecio * this.state.cantidad * (value / 100 + 1);
+      this.setState({ total: nuevoTotal.toFixed(2)}); //PENDIENTE DE CORREGIR ERROR CON DECIMALES, se utiliza toFixed(2) como workaround
+    } else {
+      this.setState({ porcentajeImpuesto: '' });
     }
   }
 
@@ -403,16 +452,16 @@ class Factura extends React.Component {
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Nueva Línea!</Text>
           <Input right placeholder="Número de Línea" editable={false} style={styles.disabled} iconContent={<Block />} />    
-          <Input right placeholder="Cantidad" keyboardType="numeric" onChangeText={(value)=> this.onTextCantidad(value)} iconContent={<Block />} />
-        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onTextUnidadMedida(index, value)}
+          <Input right placeholder="Cantidad" keyboardType="numeric" onChangeText={(value)=> this.onChangeCantidad(value)} iconContent={<Block />} />
+        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onChangeUnidadMedida(index, value)}
                        dropdownTextStyle={styles.dropdown_dropdownTextStyle}
                        dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
                        defaultValue="Unidad de medida..." 
                        options={['Unidad', 'Metro','Kilogramo','Libro','Servicios Profesionales']}/>
-        <Input right placeholder="Descripción" onChangeText={(value)=> this.onTextDescripcion(value)} iconContent={<Block />} />
+        <Input right placeholder="Descripción" onChangeText={(value)=> this.onChangeDescripcion(value)} iconContent={<Block />} />
         <Input right placeholder="Precio Unitario" keyboardType="numeric" onChangeText={(value)=> this.onTextPrecioUnitario(value)} iconContent={<Block />} />
-        <Input right placeholder="Porcentaje de Descuento" keyboardType="numeric" onChangeText={(value)=> this.onTextPorcentajeDescuento(value)} iconContent={<Block />} />
-        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onTextImpuesto(index, value)}
+        <Input right placeholder="Porcentaje de Descuento" keyboardType="numeric" onChangeText={(value)=> this.onChangePorcentajeDescuento(value)} iconContent={<Block />} />
+        <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onChangeImpuesto(index, value)}
                        dropdownTextStyle={styles.dropdown_dropdownTextStyle}
                        dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
                        defaultValue="Impuesto" options={[
@@ -424,8 +473,15 @@ class Factura extends React.Component {
                         "Arrendamiento de función financiera",
                         "Impuesto Específico sobre las bebidas envasadas sin contenido alcohólico y jabones de tocador",
                        ]}/>        
-        <Input right placeholder="Porcentaje de Impuesto" keyboardType="numeric" onChangeText={(value)=> this.onTextPorcentajeImpuesto(value)} iconContent={<Block />} />
-        <Input right placeholder="Total" editable={false} iconContent={<Block />} />
+        <Input right placeholder="Porcentaje de Impuesto" keyboardType="numeric" value={this.state.porcentajeImpuesto.toString()} onChangeText={(value)=> this.onChangePorcentajeImpuesto(value)} iconContent={<Block />} />
+        
+         <Text
+          p
+          style={{ padding: 10, fontSize: 14, marginBottom: theme.SIZES.BASE / 2 }}
+          color={argonTheme.COLORS.DEFAULT}
+         >
+          Total: {this.state.total}
+         </Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => { this.setModalVisible(!this.state.modalVisible); this.anadirItem();}}
