@@ -27,6 +27,10 @@ class Factura extends React.Component {
       impuesto: '',
       porcentajeImpuesto: 0,
       total: 0,
+      subtotal: 0,
+      montoDescuentos: 0,
+      montoImpuestos: 0,
+      totalGeneral: 0,
       date: new Date(),
       mode: 'date', //Se puede utilizar time tambien
       showFechaFactura: false,
@@ -50,7 +54,13 @@ class Factura extends React.Component {
         { id: 'Impuesto', title: 'Impuesto: ' + this.state.porcentajeImpuesto + '%'},
         { id: 'Total', title: 'Total: ' + this.state.total},
       ];
+      var subMontoDescuento = (this.state.precioUnitario * this.state.cantidad) * (this.state.porcentajeDescuento / 100);
+      var submontoImpuestos = ((this.state.precioUnitario * this.state.cantidad) - subMontoDescuento) * (this.state.porcentajeImpuesto / 100);
       this.setState({ 
+                      montoDescuentos: (subMontoDescuento + this.state.montoDescuentos).toFixed(2),
+                      montoImpuestos: (submontoImpuestos + this.state.montoImpuestos).toFixed(2),
+                      subtotal: ((this.state.precioUnitario * this.state.cantidad) + this.state.subtotal).toFixed(2),
+                      totalGeneral: parseFloat(this.state.total + this.state.totalGeneral).toFixed(2),
                       cantidad: 0,
                       precioUnitario: 0,
                       porcentajeDescuento: 0,
@@ -532,28 +542,28 @@ class Factura extends React.Component {
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
             color={argonTheme.COLORS.DEFAULT}
           >
-            Subtotal 0
+            Subtotal {this.state.subtotal}
           </Text>
           <Text
             p
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
             color={argonTheme.COLORS.DEFAULT}
           >
-            Descuento 0
+            Descuento {this.state.montoDescuentos}
           </Text>
           <Text
             p
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
             color={argonTheme.COLORS.DEFAULT}
           >
-            Impuestos 0
+            Impuestos {this.state.montoImpuestos}
           </Text>
           <Text
             p
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
             color={argonTheme.COLORS.DEFAULT}
           >
-            Total 0
+            Total {this.state.totalGeneral}
           </Text>
      
         </Block>
