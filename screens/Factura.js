@@ -165,6 +165,9 @@ class Factura extends React.Component {
         case 6:
           porcentaje = 4;
           break;
+        case 7:
+          porcentaje = 0;
+          break;
         default:
           porcentaje = '';
           break;
@@ -461,14 +464,20 @@ class Factura extends React.Component {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Nueva Línea!</Text>
-          <Input right placeholder="Número de Línea" editable={false} style={styles.disabled} iconContent={<Block />} />    
+            <Text
+              p
+              style={{ padding: 10, fontSize: 14, marginBottom: theme.SIZES.BASE / 2 }}
+              color={argonTheme.COLORS.DEFAULT}
+            >
+              Número de Línea ???
+            </Text>
           <Input right placeholder="Cantidad" keyboardType="numeric" onChangeText={(value)=> this.onChangeCantidad(value)} iconContent={<Block />} />
         <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onChangeUnidadMedida(index, value)}
                        dropdownTextStyle={styles.dropdown_dropdownTextStyle}
                        dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
                        defaultValue="Unidad de medida..." 
                        options={['Unidad', 'Metro','Kilogramo','Libro','Servicios Profesionales']}/>
-        <Input right placeholder="Descripción" onChangeText={(value)=> this.onChangeDescripcion(value)} iconContent={<Block />} />
+        <Input right placeholder="Descripción del producto" onChangeText={(value)=> this.onChangeDescripcion(value)} iconContent={<Block />} />
         <Input right placeholder="Precio Unitario" keyboardType="numeric" onChangeText={(value)=> this.onTextPrecioUnitario(value)} iconContent={<Block />} />
         <Input right placeholder="Porcentaje de Descuento" keyboardType="numeric" onChangeText={(value)=> this.onChangePorcentajeDescuento(value)} iconContent={<Block />} />
         <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onChangeImpuesto(index, value)}
@@ -482,6 +491,7 @@ class Factura extends React.Component {
                         "Impuesto a los productos del tabaco",
                         "Arrendamiento de función financiera",
                         "Impuesto Específico sobre las bebidas envasadas sin contenido alcohólico y jabones de tocador",
+                        "Exento"
                        ]}/>        
         <Input right placeholder="Porcentaje de Impuesto" keyboardType="numeric" value={this.state.porcentajeImpuesto.toString()} onChangeText={(value)=> this.onChangePorcentajeImpuesto(value)} iconContent={<Block />} />
         
