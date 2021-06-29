@@ -57,10 +57,10 @@ class Factura extends React.Component {
       var subMontoDescuento = (this.state.precioUnitario * this.state.cantidad) * (this.state.porcentajeDescuento / 100);
       var submontoImpuestos = ((this.state.precioUnitario * this.state.cantidad) - subMontoDescuento) * (this.state.porcentajeImpuesto / 100);
       this.setState({ 
-                      montoDescuentos: (subMontoDescuento + this.state.montoDescuentos).toFixed(2),
-                      montoImpuestos: (submontoImpuestos + this.state.montoImpuestos).toFixed(2),
-                      subtotal: ((this.state.precioUnitario * this.state.cantidad) + this.state.subtotal).toFixed(2),
-                      totalGeneral: parseFloat(this.state.total + this.state.totalGeneral).toFixed(2),
+                      montoDescuentos: (subMontoDescuento + this.state.montoDescuentos),
+                      montoImpuestos: (submontoImpuestos + this.state.montoImpuestos),
+                      subtotal: ((this.state.precioUnitario * this.state.cantidad) + this.state.subtotal),
+                      totalGeneral: (parseFloat(this.state.total + this.state.totalGeneral)).toFixed(2),
                       cantidad: 0,
                       precioUnitario: 0,
                       porcentajeDescuento: 0,
