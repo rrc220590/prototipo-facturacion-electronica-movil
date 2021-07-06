@@ -256,7 +256,7 @@ function AppStack(props) {
           fontWeight: "normal"
         }
       }}
-      initialRouteName="Home"
+      initialRouteName="Login"
     >
       <Drawer.Screen name="Login" component={Register} />
       <Drawer.Screen name="Home" component={HomeStack} />
