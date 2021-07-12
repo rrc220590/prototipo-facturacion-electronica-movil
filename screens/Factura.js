@@ -15,7 +15,25 @@ const { width } = Dimensions.get("screen");
 
 class Factura extends React.Component {
   
-  
+showSave = () => {
+    Alert.alert(
+      "Factura Guardada",
+      "Factura guardada satisfacoriamente",
+      [
+        {
+          text: "Ok",
+          onPress: () => this.props.navigation.navigate("Login"),
+          style: "ok",
+        },
+      ],
+      {
+        cancelable: true,
+        onDismiss: () =>
+          this.props.navigation.navigate("Login"),
+      }
+    );
+} 
+
   constructor(props) {
     super(props);
     this.state = {
@@ -587,12 +605,14 @@ class Factura extends React.Component {
         <Block flex>
           <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
             <Block center>
-              <Button color="default" style={styles.button}>
+              <Button color="default" style={styles.button} onPress={() => this.showSave()}>
                 Guardar
               </Button>
             </Block>
+            
             <Block center>
               <Button
+                onPress={ this.props.navigation.navigate("Login")}
                 color="secondary"
                 textStyle={{ color: "black", fontSize: 12, fontWeight: "700" }}
                 style={styles.button}
