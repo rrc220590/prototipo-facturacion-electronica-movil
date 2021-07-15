@@ -18,7 +18,8 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
     "Profile",*/
     "Elements",
    /* "Articles",*/
-    "Factura"
+    "Lista de Facturas",
+    "Crear Factura"
   ];
   return (
     <Block 

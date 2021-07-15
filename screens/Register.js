@@ -25,7 +25,7 @@ class Register extends React.Component {
           Alert.alert('Error', 'Ingrese una contraseña valida (debe contener al menos 8 caracteres)');
           return;
       }
-      this.props.navigation.navigate("Factura");
+      this.props.navigation.navigate("Lista de Facturas");
   }
 
   constructor(props) {

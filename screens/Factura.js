@@ -22,7 +22,7 @@ showSave = () => {
       [
         {
           text: "Ok",
-          onPress: () => this.props.navigation.navigate("Login"),
+          onPress: () => this.props.navigation.navigate("Lista de Facturas"),
           style: "ok",
         },
       ],
@@ -612,7 +612,7 @@ showSave = () => {
             
             <Block center>
               <Button
-                onPress={ this.props.navigation.navigate("Login")}
+                onPress={ this.props.navigation.navigate("Lista de Facturas")}
                 color="secondary"
                 textStyle={{ color: "black", fontSize: 12, fontWeight: "700" }}
                 style={styles.button}

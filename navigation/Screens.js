@@ -16,6 +16,7 @@ import Register from "../screens/Register";
 import Elements from "../screens/Elements";
 import Articles from "../screens/Articles";
 import Factura from "../screens/Factura";
+import ListaFactura from "../screens/ListaFactura";
 // drawer
 import CustomDrawerContent from "./Menu";
 
@@ -106,6 +107,40 @@ function FacturaStack(props) {
         options={{
           header: ({ navigation, scene }) => (
             <Header title="Factura" navigation={navigation} scene={scene} />
+          ),
+          cardStyle: { backgroundColor: "#F8F9FE" }
+        }}
+      />
+            <Stack.Screen
+        name="Pro"
+        component={Pro}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title=""
+              back
+              white
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          headerTransparent: true
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function ListaFacturaStack(props) {
+  return (
+    <Stack.Navigator mode="card" headerMode="screen">
+      <Stack.Screen
+        name="ListaFactura"
+        component={ListaFactura}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header title="Lista de Facturas" navigation={navigation} scene={scene} />
           ),
           cardStyle: { backgroundColor: "#F8F9FE" }
         }}
@@ -263,7 +298,8 @@ function AppStack(props) {
       <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen name="Elements" component={ElementsStack} />
       <Drawer.Screen name="Articles" component={ArticlesStack} />
-      <Drawer.Screen name="Factura" component={FacturaStack} />
+      <Drawer.Screen name="Crear Factura" component={FacturaStack} />
+      <Drawer.Screen name="Lista de Facturas" component={ListaFacturaStack} />
  
     </Drawer.Navigator>
   );
