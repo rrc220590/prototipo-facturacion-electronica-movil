@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ModalDropdown from 'react-native-modal-dropdown';
 
-import {Alert, Modal, Pressable,View,ScrollView, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
+import {Alert, Modal, Pressable,View,ScrollView, StyleSheet, Dimensions, TouchableOpacity, Keyboard } from "react-native";
 // Galio components
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
 // Argon themed components
@@ -91,7 +91,9 @@ showSave = () => {
   showPickerFechaFactura = () => {
     this.setState({
       showFechaFactura: true,
-    })
+    });
+    // Oculta teclado
+    Keyboard.dismiss();
   }
 
   onChangeFechaFactura = (event, selectedDate) => {
@@ -104,7 +106,9 @@ showSave = () => {
   showPickerFechaVencimiento = () => {
     this.setState({
       showFechaVencimiento: true
-    })
+    });
+    // Oculta teclado
+    Keyboard.dismiss();
   }
 
   onChangeFechaVencimiento = (event, selectedDate) => {
