@@ -28,10 +28,14 @@ showSave = () => {
       ],
       {
         cancelable: true,
-        onDismiss: () =>
-          this.props.navigation.navigate("Login"),
+       // onDismiss: () =>
+         // this.props.navigation.navigate("Login"),
       }
     );
+} 
+
+gotoListado = () => {
+  this.props.navigation.navigate("Lista de Facturas");
 } 
 
   constructor(props) {
@@ -612,7 +616,8 @@ showSave = () => {
             
             <Block center>
               <Button
-                onPress={ this.props.navigation.navigate("Lista de Facturas")}
+ 
+                onPress={() => this.gotoListado()}
                 color="secondary"
                 textStyle={{ color: "black", fontSize: 12, fontWeight: "700" }}
                 style={styles.button}
