@@ -483,7 +483,7 @@ gotoListado = () => {
         visible={this.state.modalVisible}
         
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
+         // Alert.alert("Modal has been closed.");
          this.setModalVisible(!this.state.modalVisible);
         }}
       > 
@@ -495,7 +495,7 @@ gotoListado = () => {
               style={{ padding: 10, fontSize: 14, marginBottom: theme.SIZES.BASE / 2 }}
               color={argonTheme.COLORS.DEFAULT}
             >
-              Número de Línea ???
+              {Object.keys(this.state.categories).length + 1}
             </Text>
           <Input right placeholder="Cantidad" keyboardType="numeric" onChangeText={(value)=> this.onChangeCantidad(value)} iconContent={<Block />} />
         <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onChangeUnidadMedida(index, value)}
