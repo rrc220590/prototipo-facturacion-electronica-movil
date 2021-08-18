@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ModalDropdown from 'react-native-modal-dropdown';
 
-import {Alert, Modal, Pressable,View,ScrollView, StyleSheet, Dimensions, TouchableOpacity, Keyboard } from "react-native";
+import {Alert, Modal, Pressable, View, ScrollView, StyleSheet, Dimensions, TouchableOpacity, Keyboard, FlatList, SafeAreaView } from "react-native";
 // Galio components
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
 // Argon themed components
@@ -40,6 +40,7 @@ gotoListado = () => {
 
   constructor(props) {
     super(props);
+    this.arrayLineasFactura = [],
     this.state = {
       cantidad: 0,
       unidadMedida: '',
@@ -60,22 +61,45 @@ gotoListado = () => {
       fechaFactura: '',
       fechaVencimiento: '',
       modalVisible:false,
-      categories: {},
+      lineasFactura: [],
     };
   }
 
+  componentDidMount() {
+    this.setState({ lineasFactura: [...this.arrayLineasFactura] })
+  }
+
+  FlatListItemSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#607D8B",
+        }}
+      />
+    );
+  }
+ 
+  GetItem(item) {
+ 
+    Alert.alert(item);
+ 
+  }
+
   anadirItem() {
-      var numeroLinea = Object.keys(this.state.categories).length + 1;
-      var key = 'linea' + numeroLinea;
-      this.state.categories[key] = [
-        { id: 'id', title: numeroLinea },
-        { id: 'Descripcion', title: this.state.descripcion },
-        { id: 'Cantidad', title: 'Cantidad: ' + this.state.cantidad},
-        { id: 'Precio', title: 'Precio: ' + this.state.precioUnitario},
-        { id: 'Descuento', title: 'Descuento: ' + this.state.porcentajeDescuento + '%'},
-        { id: 'Impuesto', title: 'Impuesto: ' + this.state.porcentajeImpuesto + '%'},
-        { id: 'Total', title: 'Total: ' + this.state.total},
-      ];
+      var numeroLinea = Object.keys(this.state.lineasFactura).length + 1;
+      this.arrayLineasFactura.push({
+                                    id : numeroLinea,
+                                    descripcion: this.state.descripcion,
+                                    cantidad: this.state.cantidad,
+                                    precio: this.state.precioUnitario,
+                                    descuento: this.state.porcentajeDescuento + '%',
+                                    impuesto: this.state.porcentajeImpuesto + '%',
+                                    total: this.state.total,
+                                  });
+      this.setState({ lineasFactura: [...this.arrayLineasFactura] })
+
       var subMontoDescuento = (this.state.precioUnitario * this.state.cantidad) * (this.state.porcentajeDescuento / 100);
       var submontoImpuestos = ((this.state.precioUnitario * this.state.cantidad) - subMontoDescuento) * (this.state.porcentajeImpuesto / 100);
       this.setState({ 
@@ -495,7 +519,7 @@ gotoListado = () => {
               style={{ padding: 10, fontSize: 14, marginBottom: theme.SIZES.BASE / 2 }}
               color={argonTheme.COLORS.DEFAULT}
             >
-              {Object.keys(this.state.categories).length + 1}
+              {Object.keys(this.state.lineasFactura).length + 1}
             </Text>
           <Input right placeholder="Cantidad" keyboardType="numeric" onChangeText={(value)=> this.onChangeCantidad(value)} iconContent={<Block />} />
         <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onChangeUnidadMedida(index, value)}
@@ -564,13 +588,24 @@ gotoListado = () => {
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
           
         <Block>
-          {
-            Object.keys(this.state.categories).map(item => (
-              <Block style={{ marginBottom: theme.SIZES.BASE }}>
-                <Header tabs={this.state.categories[item]} title={this.state.categories[item][1].title} />
-              </Block>
-            ))
-          }
+          <View>
+          <ScrollView horizontal={true}>
+            <FlatList
+              data={this.state.lineasFactura}
+              width='100%'
+              extraData={this.state.lineasFactura}
+              keyExtractor={(item, index) => String(index)}
+              ItemSeparatorComponent={this.FlatListItemSeparator}
+              renderItem={({ item }) =>
+              <View>
+                <Text style={styles.item}
+                      onPress={this.GetItem.bind(this, item.id)} >
+                        {item.id + " " + item.descripcion + " " + item.cantidad + " " + item.precio + " " + item.descuento + " " + item.impuesto + " " + item.total}
+                </Text>
+              </View>}
+            />
+            </ScrollView>
+          </View>
         </Block>
      
           <Text
@@ -786,7 +821,7 @@ gotoListado = () => {
   render() {
     return (
       <Block flex center>
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 30, width }}>
+        <ScrollView horizontal={false} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 30, width }}>
           {this.renderButtons()}
           {this.renderText()}
           {this.renderInputs()}
@@ -921,6 +956,11 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center"
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
   }
 });
 
