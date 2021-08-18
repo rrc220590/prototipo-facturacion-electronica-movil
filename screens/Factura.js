@@ -13,9 +13,127 @@ import moment from 'moment';
 
 const { width } = Dimensions.get("screen");
 
+
 class Factura extends React.Component {
   
+  
 showSave = () => {
+
+  if (this.state.cliente== "") {
+    Alert.alert(
+      "Falta completar información",
+      "Complete el campo Cliente por favor",
+      [
+        {
+          text: "Ok",
+          style: "ok",
+        },
+      ],
+      {
+        cancelable: true,
+       // onDismiss: () =>
+         // this.props.navigation.navigate("Login"),
+      }
+    );
+    return;
+  } 
+
+  if (this.state.fechaFactura== "") {
+    Alert.alert(
+      "Falta completar información",
+      "Complete el campo Fecha Factura por favor",
+      [
+        {
+          text: "Ok",
+          style: "ok",
+        },
+      ],
+      {
+        cancelable: true,
+       // onDismiss: () =>
+         // this.props.navigation.navigate("Login"),
+      }
+    );
+    return;
+  } 
+
+  if (this.state.fechaVencimiento== "") {
+    Alert.alert(
+      "Falta completar información",
+      "Complete el campo Fecha Vencimiento por favor",
+      [
+        {
+          text: "Ok",
+          style: "ok",
+        },
+      ],
+      {
+        cancelable: true,
+       // onDismiss: () =>
+         // this.props.navigation.navigate("Login"),
+      }
+    );
+    return;
+  } 
+
+  if (this.state.condicionVenta== "") {
+    Alert.alert(
+      "Falta completar información",
+      "Complete el campo Condición Venta por favor",
+      [
+        {
+          text: "Ok",
+          style: "ok",
+        },
+      ],
+      {
+        cancelable: true,
+       // onDismiss: () =>
+         // this.props.navigation.navigate("Login"),
+      }
+    );
+    return;
+  } 
+
+  if (this.state.moneda== "") {
+    Alert.alert(
+      "Falta completar información",
+      "Complete el campo Moneda por favor",
+      [
+        {
+          text: "Ok",
+          style: "ok",
+        },
+      ],
+      {
+        cancelable: true,
+       // onDismiss: () =>
+         // this.props.navigation.navigate("Login"),
+      }
+    );
+    return;
+  } 
+
+  
+  if (this.state.medioPago== "") {
+    Alert.alert(
+      "Falta completar información",
+      "Complete el campo Medio Pago por favor",
+      [
+        {
+          text: "Ok",
+          style: "ok",
+        },
+      ],
+      {
+        cancelable: true,
+       // onDismiss: () =>
+         // this.props.navigation.navigate("Login"),
+      }
+    );
+    return;
+  } 
+
     Alert.alert(
       "Factura Guardada",
       "Factura guardada satisfacoriamente",
@@ -42,6 +160,10 @@ gotoListado = () => {
     super(props);
     this.arrayLineasFactura = [],
     this.state = {
+      cliente:'',
+      condicionVenta:'',
+      moneda:'',
+      medioPago:'',
       cantidad: 0,
       unidadMedida: '',
       descripcion: '',
@@ -239,7 +361,6 @@ gotoListado = () => {
       this.setState({ porcentajeImpuesto: '' });
     }
   }
-
   state = {
     "switch-1": true,
     "switch-2": false
@@ -265,23 +386,24 @@ gotoListado = () => {
         </Block>
 
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-
-
           <Block >
-
             <Block center>
               <Select
                 style={styles.button}
-              
-                options={["Adrian González Hernández  ", 
-                          "Gilberto Duran Luna", 
-                          "Laura Acevedo Rodríguez", 
-                          "Miriam Fernández Campos", 
-                          "Naomy Barrientos Chacón", 
-                          "Paola Nuñez Guerrero", 
-                          "Pedro Flores Camacho",
-                          "Teresa Perez Asturias",
-                          "Zamira Bolaños Sánchez"]}
+           
+                onSelect={(index, value
+                  ) => {
+                this.setState({cliente:value })
+                }}
+                options={["Adrian González Hernández",
+                "Gilberto Duran Luna",
+                "Laura Acevedo Rodríguez",
+                "Miriam Fernández Campos",
+               "Naomy Barrientos Chacón",
+                "Paola Nuñez Guerrero",
+                "Pedro Flores Camacho",
+               "Teresa Perez Asturias", 
+                "Zamira Bolaños Sánchez"]}
               />
             </Block>
           </Block>
@@ -311,6 +433,7 @@ gotoListado = () => {
                   right
                   placeholder="Ingrese fecha de factura"
                   value={this.state.fechaFactura}
+                
                   editable = {true}
                   onFocus={this.showPickerFechaFactura}
                   iconContent={
@@ -414,6 +537,11 @@ gotoListado = () => {
             <Block center>
               <Select
               style={styles.button}
+
+              onSelect={(index, value
+                ) => {
+              this.setState({condicionVenta:value })
+              }}
               
                 options={["Contado",
                           "Crédito",
@@ -447,7 +575,10 @@ gotoListado = () => {
   <Block center>
     <Select
     style={styles.button}
-    
+    onSelect={(index, value
+      ) => {
+    this.setState({moneda:value })
+    }}
       options={["CRC",
                 "USD"
       ]}
@@ -476,6 +607,10 @@ gotoListado = () => {
             <Block center>
               <Select
                 style={styles.button}
+                onSelect={(index, value
+                  ) => {
+                this.setState({medioPago:value })
+                }}
                 options={["Efectivo",
                   "Tarjeta",
                   "Cheque",

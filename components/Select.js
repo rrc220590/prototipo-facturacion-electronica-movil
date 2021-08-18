@@ -14,7 +14,6 @@ class DropDown extends React.Component {
 
   handleOnSelect = (index, value) => {
     const { onSelect } = this.props;
-
     this.setState({ value: value });
     onSelect && onSelect(index, value);
   }
