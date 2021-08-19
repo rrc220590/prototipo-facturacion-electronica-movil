@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ModalDropdown from 'react-native-modal-dropdown';
 
-import {Alert, Modal, Pressable, View, ScrollView, StyleSheet, Dimensions, TouchableOpacity, Keyboard, FlatList, SafeAreaView } from "react-native";
+import {Alert, Modal, Pressable, View, ScrollView, StyleSheet, Dimensions, TouchableOpacity, Keyboard, FlatList } from "react-native";
 // Galio components
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
 // Argon themed components
