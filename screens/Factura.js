@@ -204,9 +204,7 @@ gotoListado = () => {
   }
  
   GetItem(item) {
- 
     Alert.alert(item);
- 
   }
 
   anadirItem() {
@@ -734,8 +732,8 @@ gotoListado = () => {
               renderItem={({ item }) =>
               <View>
                 <Text style={styles.item}
-                      onPress={this.GetItem.bind(this, item.id)} >
-                        {item.id + " " + item.descripcion + " " + item.cantidad + " " + item.precio + " " + item.descuento + " " + item.impuesto + " " + item.total}
+                      onPress={this.GetItem.bind(this, (item.descripcion + " Cantidad: " + item.cantidad + " Total: " + item.total))} >
+                        {item.id + " " + item.descripcion + " Precio: " + item.precio + " Cantidad: " + item.cantidad +" Descuento: " + item.descuento + " Impuesto: " + item.impuesto + " Total: " + item.total}
                 </Text>
               </View>}
             />
