@@ -208,6 +208,141 @@ gotoListado = () => {
   }
 
   anadirItem() {
+
+    if (this.state.cantidad== "") {
+      Alert.alert(
+        "Falta completar información",
+        "Complete el campo Cantidad por favor",
+        [
+          {
+            text: "Ok",
+            style: "ok",
+          },
+        ],
+        {
+          cancelable: true,
+         // onDismiss: () =>
+           // this.props.navigation.navigate("Login"),
+        }
+      );
+      return;
+    } 
+
+    if (this.state.unidadMedida== "") {
+      Alert.alert(
+        "Falta completar información",
+        "Complete el campo Unidad de Medida por favor",
+        [
+          {
+            text: "Ok",
+            style: "ok",
+          },
+        ],
+        {
+          cancelable: true,
+         // onDismiss: () =>
+           // this.props.navigation.navigate("Login"),
+        }
+      );
+      return;
+    } 
+
+    if (this.state.descripcion== "") {
+      Alert.alert(
+        "Falta completar información",
+        "Complete el campo Descripción del Producto por favor",
+        [
+          {
+            text: "Ok",
+            style: "ok",
+          },
+        ],
+        {
+          cancelable: true,
+         // onDismiss: () =>
+           // this.props.navigation.navigate("Login"),
+        }
+      );
+      return;
+    } 
+
+    if (this.state.precioUnitario== "") {
+      Alert.alert(
+        "Falta completar información",
+        "Complete el campo Precio Unitario por favor",
+        [
+          {
+            text: "Ok",
+            style: "ok",
+          },
+        ],
+        {
+          cancelable: true,
+         // onDismiss: () =>
+           // this.props.navigation.navigate("Login"),
+        }
+      );
+      return;
+    } 
+
+    if (this.state.impuesto== "") {
+      Alert.alert(
+        "Falta completar información",
+        "Complete el campo Impuesto por favor",
+        [
+          {
+            text: "Ok",
+            style: "ok",
+          },
+        ],
+        {
+          cancelable: true,
+         // onDismiss: () =>
+           // this.props.navigation.navigate("Login"),
+        }
+      );
+      return;
+    } 
+
+    if (this.state.porcentajeDescuento== "") {
+      Alert.alert(
+        "Falta completar información",
+        "Complete el campo Porcentaje Impuesto por favor",
+        [
+          {
+            text: "Ok",
+            style: "ok",
+          },
+        ],
+        {
+          cancelable: true,
+         // onDismiss: () =>
+           // this.props.navigation.navigate("Login"),
+        }
+      );
+      return;
+    } 
+
+    if (this.state.porcentajeImpuesto== "") {
+      Alert.alert(
+        "Falta completar información",
+        "Complete el campo Porcentaje Impuesto por favor",
+        [
+          {
+            text: "Ok",
+            style: "ok",
+          },
+        ],
+        {
+          cancelable: true,
+         // onDismiss: () =>
+           // this.props.navigation.navigate("Login"),
+        }
+      );
+      return;
+    } 
+
+    this.setModalVisible(!this.state.modalVisible);
       var numeroLinea = Object.keys(this.state.lineasFactura).length + 1;
       this.arrayLineasFactura.push({
                                     id : numeroLinea,
@@ -687,7 +822,7 @@ gotoListado = () => {
          </Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => { this.setModalVisible(!this.state.modalVisible); this.anadirItem();}}
+              onPress={() => { this.anadirItem();}}
             >
                  
               <Text style={styles.textStyle}>Agregar Artículo</Text>
