@@ -17,6 +17,7 @@ const { width, height } = Dimensions.get("screen");
 class Register extends React.Component {
 
   onSubmit = () => {
+    /*
       const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
       if (reg.test(this.state.email) == false) {
           Alert.alert('Error', 'Ingrese un correo electrónico valido');
@@ -25,6 +26,7 @@ class Register extends React.Component {
           Alert.alert('Error', 'Ingrese una contraseña valida (debe contener al menos 8 caracteres)');
           return;
       }
+      */
       this.props.navigation.navigate("Lista de Facturas");
   }
 

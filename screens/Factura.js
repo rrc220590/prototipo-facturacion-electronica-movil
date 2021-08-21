@@ -202,9 +202,26 @@ gotoListado = () => {
       />
     );
   }
- 
-  GetItem(item) {
-    Alert.alert(item);
+  
+  calculaNumeroLinea(value) {
+    if(value == 0) {
+      return 1;
+    } else {
+      return ((value / 7) + 1);
+    }
+  }
+
+  formateaTexto(value, numChars, isNumber) {
+    if(value.length > numChars) {
+      value = value.substr(0, (numChars - 1));
+    } else if (value.length < numChars) {
+      if(isNumber == 1) {
+        value = value + new Array(numChars - value.length).join(' ');
+      } else {
+        value = new Array(numChars - value.length).join(' ') + value;
+      }
+    }
+    return value;
   }
 
   anadirItem() {
@@ -343,16 +360,14 @@ gotoListado = () => {
     } 
 
     this.setModalVisible(!this.state.modalVisible);
-      var numeroLinea = Object.keys(this.state.lineasFactura).length + 1;
-      this.arrayLineasFactura.push({
-                                    id : numeroLinea,
-                                    descripcion: this.state.descripcion,
-                                    cantidad: this.state.cantidad,
-                                    precio: this.state.precioUnitario,
-                                    descuento: this.state.porcentajeDescuento + '%',
-                                    impuesto: this.state.porcentajeImpuesto + '%',
-                                    total: this.state.total,
-                                  });
+      var numeroLinea = this.calculaNumeroLinea(Object.keys(this.state.lineasFactura).length);
+      this.arrayLineasFactura.push({title: numeroLinea, numChars: 2, isNumber: 1});
+      this.arrayLineasFactura.push({title: this.state.descripcion, numChars: 18, isNumber: 0});
+      this.arrayLineasFactura.push({title: this.state.precioUnitario, numChars: 7, isNumber: 1});
+      this.arrayLineasFactura.push({title: this.state.cantidad, numChars: 4, isNumber: 1});
+      this.arrayLineasFactura.push({title: (this.state.porcentajeDescuento + '%'), numChars: 3, isNumber: 1});
+      this.arrayLineasFactura.push({title: (this.state.porcentajeImpuesto + '%'), numChars: 3, isNumber: 1});
+      this.arrayLineasFactura.push({title: this.state.total, numChars: 8, isNumber: 1});
       this.setState({ lineasFactura: [...this.arrayLineasFactura] })
 
       var subMontoDescuento = (this.state.precioUnitario * this.state.cantidad) * (this.state.porcentajeDescuento / 100);
@@ -787,7 +802,7 @@ gotoListado = () => {
               style={{ padding: 10, fontSize: 14, marginBottom: theme.SIZES.BASE / 2 }}
               color={argonTheme.COLORS.DEFAULT}
             >
-              {Object.keys(this.state.lineasFactura).length + 1}
+              {this.calculaNumeroLinea(Object.keys(this.state.lineasFactura).length)}
             </Text>
           <Input right placeholder="Cantidad" keyboardType="numeric" onChangeText={(value)=> this.onChangeCantidad(value)} iconContent={<Block />} />
         <ModalDropdown textStyle={styles.dropdown_text} onSelect={(index, value)=> this.onChangeUnidadMedida(index, value)}
@@ -864,11 +879,11 @@ gotoListado = () => {
               extraData={this.state.lineasFactura}
               keyExtractor={(item, index) => String(index)}
               ItemSeparatorComponent={this.FlatListItemSeparator}
+              numColumns={7}
               renderItem={({ item }) =>
               <View>
-                <Text style={styles.item}
-                      onPress={this.GetItem.bind(this, (item.descripcion + " Cantidad: " + item.cantidad + " Total: " + item.total))} >
-                        {item.id + " " + item.descripcion + " Precio: " + item.precio + " Cantidad: " + item.cantidad +" Descuento: " + item.descuento + " Impuesto: " + item.impuesto + " Total: " + item.total}
+                <Text style={styles.item} >
+                        {this.formateaTexto(item.title, item.numChars, item.isNumber)}
                 </Text>
               </View>}
             />
