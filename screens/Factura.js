@@ -245,7 +245,7 @@ gotoListado = () => {
       return;
     } 
 
-    if (this.state.unidadMedida== "") {
+    if (this.state.unidadMedida=== "") {
       Alert.alert(
         "Falta completar información",
         "Complete el campo Unidad de Medida por favor",
@@ -302,7 +302,7 @@ gotoListado = () => {
       return;
     } 
 
-    if (this.state.impuesto== "") {
+    if (this.state.impuesto=== "") {
       Alert.alert(
         "Falta completar información",
         "Complete el campo Impuesto por favor",
@@ -809,7 +809,7 @@ gotoListado = () => {
                        dropdownTextStyle={styles.dropdown_dropdownTextStyle}
                        dropdownStyle={styles.dropdown_dropdown} style={[styles.dropdown, styles.input]}
                        defaultValue="Unidad de medida..." 
-                       options={['Unidad', 'Metro','Kilogramo','Libro','Servicios Profesionales']}/>
+                       options={['Unidad', 'Metro','Kilogramo','Libras','Servicios Profesionales']}/>
         <Input right placeholder="Descripción del producto" onChangeText={(value)=> this.onChangeDescripcion(value)} iconContent={<Block />} />
         <Input right placeholder="Precio Unitario" keyboardType="numeric" onChangeText={(value)=> this.onTextPrecioUnitario(value)} iconContent={<Block />} />
         <Input right placeholder="Porcentaje de Descuento" keyboardType="numeric" onChangeText={(value)=> this.onChangePorcentajeDescuento(value)} iconContent={<Block />} />
