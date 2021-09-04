@@ -53,7 +53,7 @@ class Register extends React.Component {
               <Block flex>
                 <Block flex={0.17} middle>
                   <Text color="#8898AA" size={12}>
-                   [[[LOGO]]]
+                   INICIAR SESION
                   </Text>
                 </Block>
                 <Block flex center>
@@ -99,7 +99,7 @@ class Register extends React.Component {
                     <Block middle>
                       <Button onPress={() => this.onSubmit()} color="primary" style={styles.createButton}>
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
-                          INICIAR SESION
+                          INGRESAR
                         </Text>
                       </Button>
                     </Block>
