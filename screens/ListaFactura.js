@@ -35,11 +35,11 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.arrayListaFacturas = [
-      { numeroFactura: '765995', cliente: 'Adrian González', fechaFactura: '11/08/2021', total: '$299.99' },
-      { numeroFactura: '765994', cliente: 'Gilberto Duran', fechaFactura: '10/08/2021', total: '₡255220' },
-      { numeroFactura: '765993', cliente: 'Laura Acevedo', fechaFactura: '30/07/2021', total: '$26' },
-      { numeroFactura: '765992', cliente: 'Laura Acevedo', fechaFactura: '30/07/2021', total: '$40.99' },
-      { numeroFactura: '765991', cliente: 'Miriam Fernández', fechaFactura: '23/07/2021', total: '₡83500' },
+      { numeroFactura: '765995', cliente: ' Adrian González   ', fechaFactura: '11/08/2021', total:    '$299.99   ' },
+      { numeroFactura: '765994', cliente: ' Gilberto Duran       ', fechaFactura: '10/08/2021', total: '₡2550.00' },
+      { numeroFactura: '765993', cliente: ' Laura Acevedo      ', fechaFactura: '30/07/2021', total:   '$26.00    ' },
+      { numeroFactura: '765992', cliente: ' Carmen Chacón      ', fechaFactura: '30/07/2021', total:   '$40.99    ' },
+      { numeroFactura: '765991', cliente: ' Miriam Fernández', fechaFactura: '23/07/2021', total:      '₡83500.00 ' },
     ],
     this.state = {
       listaFacturas: [],
