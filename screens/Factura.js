@@ -322,9 +322,9 @@ gotoListado = () => {
     } 
 
     if (this.state.porcentajeDescuento== "") {
-      Alert.alert(
+      /*Alert.alert(
         "Falta completar información",
-        "Complete el campo Porcentaje Impuesto por favor",
+        "Complete el campo Porcentaje Descuento por favor",
         [
           {
             text: "Ok",
@@ -336,7 +336,8 @@ gotoListado = () => {
          // onDismiss: () =>
            // this.props.navigation.navigate("Login"),
         }
-      );
+      );*/
+      this.state.porcentajeDescuento=0;
       return;
     } 
 
