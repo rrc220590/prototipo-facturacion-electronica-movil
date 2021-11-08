@@ -362,7 +362,7 @@ gotoListado = () => {
 
     this.setModalVisible(!this.state.modalVisible);
       var numeroLinea = this.calculaNumeroLinea(Object.keys(this.state.lineasFactura).length);
-      this.arrayLineasFactura.push({title: numeroLinea, numChars: 2, isNumber: 1});
+      this.arrayLineasFactura.push({title: "# "+numeroLinea, numChars: 18, isNumber: 0});
       this.arrayLineasFactura.push({title: this.state.descripcion, numChars: 18, isNumber: 0});
       this.arrayLineasFactura.push({title: this.state.precioUnitario, numChars: 7, isNumber: 1});
       this.arrayLineasFactura.push({title: this.state.cantidad, numChars: 4, isNumber: 1});
