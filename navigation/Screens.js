@@ -300,6 +300,7 @@ function AppStack(props) {
       <Drawer.Screen name="Articles" component={ArticlesStack} />
       <Drawer.Screen name="Crear Factura" component={FacturaStack} />
       <Drawer.Screen name="Lista de Facturas" component={ListaFacturaStack} />
+      <Drawer.Screen name="Logout" component={Register} />
  
     </Drawer.Navigator>
   );
