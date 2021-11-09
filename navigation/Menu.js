@@ -16,7 +16,7 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
     "Login",
     /*"Home", 
     "Profile",*/
-    "Elements",
+   // "Elements",
    /* "Articles",*/
     "Lista de Facturas",
     "Crear Factura",
